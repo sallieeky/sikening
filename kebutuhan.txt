@@ -1,0 +1,130 @@
+DIMENU KUE KASI KATEGORI
+
+1. Dapat menampilkan menu-menu dan harga yang ada di Cake Nining
+2. Dapat melakukan pemesanan menu yang ada di Cake Nining
+3. Dapat melakukan pendataan keuangan Cake Nining
+4. Dapat memberikan informasi terkait produk yang tersedia di Cake Nining
+5. Dapat melakukan pembayaran secara online dan melakukan delivery melalui aplikasi
+
+FILE DATA
+Adapun File data yang dapat diterima oleh SIKENING yaitu file .jpg, .png, .pdf, dan .jpeg.
+
+
+Drive gambar : https://drive.google.com/drive/folders/1bdCgImIriGvf2arF3QVSS34kDlc081LZ?usp=sharing
+Contoh Template Dashboard : https://demo.adminkit.io/pages-invoice.html
+
+
+========== Menampilkan profil Cake Nining beserta menu, harga, dan stok produk yang ada =========
+Input 	:
+- Admin dapat menambahkan informasi terkait profil Cake Nining beserta menu, harga produk dan stok produk yang masih tersedia.
+
+Proses 	:
+- Admin mengakses website SIKENING.
+- Admin mengakses fitur menambahkan informasi profil, menu, harga produk dan stok produk.
+- Admin dapat menambahkan informasi profil, menu, harga produk dan stok produk.
+- Sistem menyimpan data informasi profil, menu, harga produk dan stok produk.
+- Logout.
+
+Output	:
+- Pengguna dapat melakukan pemesanan menu yang ada di Cake Nining.
+=============================================================================================
+
+
+========================== Melakukan pembayaran secara online ================================= 
+Input 	:
+- Pengguna dapat melakukan pembayaran secara online dan pemesanan melalui aplikasi SIKENING.
+
+Proses 	:
+- Pengguna mengakses website SIKENING.
+- Pengguna memilih produk yang ingin dipesan pada website SIKENING.
+- Produk yang dipilih akan masuk ke dalam fitur keranjang pengguna.
+- Pengguna melakukan check out.
+- Pengguna memilih fitur pembayaran yang ada pada halaman website.
+- Pengguna memasukkan bukti pembayaran 
+- Sistem otomatis menampilkan faktur invoice.
+- Sistem menyimpan data pembayaran produk yang dipesan secara online pada dashboard.
+- Logout.
+
+Output	:
+- Pengguna berhasil melakukan pembayaran secara online.
+=============================================================================================
+
+==================== Melakukan pemesanan menu melalui website SIKENING =========================
+Input 	:
+- Pengguna dapat melakukan pemesanan melalui aplikasi SIKENING.
+
+Proses 	:
+- Pengguna mengakses website SIKENING.
+- Pengguna memilih fitur menampilkan produk.
+- Pengguna memilih produk
+- Produk yang dipilih secara otomatis masuk ke dalam fitur keranjang pengguna.
+- Pengguna dapat menghapus pilihan produk yang tidak ingin dipesan dari keranjang produk.
+- Pengguna dapat melakukan check out dari keranjang produk untuk produk yang ingin dipesan.
+- Pengguna melakukan pembayaran melalui website
+- Admin memasukkan data pemesanan pada dashboard Cake Nining.
+- Logout.
+
+Output	:
+- Pengguna dapat melakukan pembayaran pemesanan produk Cake Nining.
+================================================================================================
+
+
+=========================== Melakukan pendataan keuangan Cake Nining. ============================
+Input 	:
+- Admin memasukkan data keuangan dari penjualan produk Cake Nining.
+
+Proses 	:
+- Admin mengakses website SIKENING.
+- Admin mengakses fitur data keuangan pada dashboard SIKENING.
+- Admin memasukkan data pembayaran produk yang dipesan secara online dalam fitur data keuangan.
+- Admin dapat memasukkan data pembayaran produk yang dipesan secara offline pada fitur data keuangan.
+- Sistem menyimpan data pembayaran produk pada dashboard.
+- Sistem menampilkan grafik penjualan produk dari data keuangan.
+- Logout.
+
+Output	:
+- Admin dapat melakukan pendataan keuangan dari penjualan produk Cake Nining.
+================================================================================================
+
+================= Admin dapat memeriksa dan mengubah status pembayaran pelanggan. ================
+Input :  
+- Admin dapat memeriksa dan mengubah status pembayaran pelanggan
+
+Proses 	:
+- Admin mengakses website SIKENING.
+- Admin memilih fitur pembayaran pelanggan
+- Admin memeriksa bukti pembayaran pelanggan
+- Admin melakukan verifikasi pembayaran
+- Admin mengubah status pembayaran
+- Logout.
+
+Output	:
+- Admin memproses pemesanan pelanggan
+================================================================================================
+
+
+ADMIN
+- Dapat menambahkan data profil, menu, harga produk dan stok produk
+- Dapat mengubah data profil, menu, harga produk dan stok produk
+- Dapat menghapus data profil, menu, harga produk dan stok produk
+- Dapat memasukkan data pemesanan
+- Dapat mengubah data pemesanan
+- Dapat menghapus data pemesanan
+- Dapat memeriksa bukti pembayaran pelanggan
+- Dapat mengubah status pembayaran pelanggan
+- Dapat memasukkan data keuangan
+- Dapat mengubah data keuangan
+- Dapat menghapus data keuangan
+
+PENGGUNA
+- Dapat keluar dari SIKENING
+- Dapat melihat tampilan dashboard sistem informasi pada SIKENING
+- Dapat melihat informasi profil
+- Dapat melihat informasi produk
+- Dapat melakukan pemesanan 
+- Dapat melakukan pembayaran secara online 
+
+PENGGUNA UMUM
+- Dapat mengakses SIKENING
+- Dapat melakukan pendaftaran akun
+- Dapat melihat tampilan website sistem informasi pada SIKENING
