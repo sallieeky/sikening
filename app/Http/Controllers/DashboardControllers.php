@@ -35,6 +35,10 @@ class DashboardControllers extends Controller
         $deskripsi = Profile::where("nama", "deskripsi")->pluck("value")->first();
         return view("dashboard.kelola", compact("deskripsi"));
     }
+    public function keuangan()
+    {
+        return view("dashboard.keuangan");
+    }
     public function akunPengguna()
     {
         return view("dashboard.akun_pengguna");

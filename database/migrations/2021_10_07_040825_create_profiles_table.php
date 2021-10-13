@@ -17,6 +17,7 @@ class CreateProfilesTable extends Migration
             $table->id();
             $table->string("nama");
             $table->text("value");
+            $table->date("tanggal_akhir")->nullable();
             $table->timestamps();
         });
     }

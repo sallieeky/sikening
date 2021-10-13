@@ -49,14 +49,14 @@
             </a>
 					</li>
 					@if (Auth::user()->role == "user")
-					<li class="sidebar-item @yield("invoice-active")">
-						<a class="sidebar-link" href="/invoice">
-							<i class="align-middle" data-feather="credit-card"></i> <span class="align-middle">Invoice</span>
-						</a>
-					</li>
 					<li class="sidebar-item @yield("keranjang-active")">
 						<a class="sidebar-link" href="/keranjang">
 							<i class="align-middle" data-feather="shopping-cart"></i> <span class="align-middle">Keranjang</span>
+						</a>
+					</li>
+					<li class="sidebar-item @yield("invoice-active")">
+						<a class="sidebar-link" href="/invoice">
+							<i class="align-middle" data-feather="credit-card"></i> <span class="align-middle">Invoice</span>
 						</a>
 					</li>
 					@endif
@@ -68,6 +68,11 @@
 					<li class="sidebar-item @yield("kelola-active")">
 						<a class="sidebar-link" href="/kelola">
               <i class="align-middle" data-feather="package"></i> <span class="align-middle">Kelola SIKENING</span>
+            </a>
+					</li>
+					<li class="sidebar-item @yield("keuangan-active")">
+						<a class="sidebar-link" href="/keuangan">
+              <i class="align-middle" data-feather="dollar-sign"></i> <span class="align-middle">Kelola Keuangan</span>
             </a>
 					</li>
 					<li class="sidebar-item @yield("akun_pengguna-active")">
@@ -330,10 +335,10 @@
 					<div class="row text-muted">
 						<div class="col-6 text-start">
 							<p class="mb-0">
-								<a class="text-muted" href="https://adminkit.io/" target="_blank"><strong>AdminKit</strong></a> &copy;
+								<a class="text-muted" href="/" target="_blank"><strong>Sikening</strong></a> &copy;
 							</p>
 						</div>
-						<div class="col-6 text-end">
+						{{-- <div class="col-6 text-end">
 							<ul class="list-inline">
 								<li class="list-inline-item">
 									<a class="text-muted" href="https://adminkit.io/" target="_blank">Support</a>
@@ -348,7 +353,7 @@
 									<a class="text-muted" href="https://adminkit.io/" target="_blank">Terms</a>
 								</li>
 							</ul>
-						</div>
+						</div> --}}
 					</div>
 				</div>
 			</footer>

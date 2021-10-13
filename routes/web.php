@@ -34,6 +34,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
   // ############## HALAMAN ADMIN AJA YANG BISA AKSES ############# \\
   Route::middleware(['admin'])->group(function () {
     Route::get('/kelola', [DashboardControllers::class, 'kelola']);
+    Route::get('/keuangan', [DashboardControllers::class, 'keuangan']);
     Route::get('/akun-pengguna', [DashboardControllers::class, 'akunPengguna']);
   });
 
