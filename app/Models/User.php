@@ -21,6 +21,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'nama',
         'email',
         'password',
+        'role',
+        'foto'
     ];
 
     /**
@@ -41,4 +43,13 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function keranjang()
+    {
+        return $this->hasMany(Keranjang::class);
+    }
+    public function invoice()
+    {
+        return $this->hasMany(Invoice::class);
+    }
 }
