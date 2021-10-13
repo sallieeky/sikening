@@ -19,15 +19,11 @@ class DatabaseSeeder extends Seeder
         $this->call(MenuSeeder::class);
         $this->call(KeranjangSeeder::class);
         $this->call(InvoiceSeeder::class);
+        $this->call(ProfileSeeder::class);
 
         Statistik::create([
             "nama" => "kunjungan",
             "value" => 0
-        ]);
-
-        Profile::create([
-            "nama" => "deskripsi",
-            "value" => "Cake Nining adalah toko yang menyediakan berbagai jenis kue seperti kue kering dan kue basah dengan rasa yang nikmat tanpa pengawet dan harga terjangkau. Cake Nining dikelola oleh owner (pemilik) dan beberapa karyawannya dengan segala aktivitasnya seperti mencari bahan produksi, memasarkan produk, penjualan, hingga melakukan manajemen keuangan secara manual."
         ]);
     }
 }

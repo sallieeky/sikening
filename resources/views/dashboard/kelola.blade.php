@@ -19,16 +19,17 @@
           <div class="card-body">
             <div class="row">
               <div class="col-md-8">
-                <form action="#" method="post">
+                <form action="/kelola-profile" method="POST">
+                  @csrf
                   <div class="form-group mb-3">
-                    <label >Nama Toko</label>
+                    <label>Nama Toko</label>
                     <h3><strong>Cake Nining</strong></h3>
                   </div>
                   <div class="form-group mb-3">
                     <label for="deskripsi">Deskripsi</label>
-                    <textarea class="form-control" name="" id="deskripsi" rows="10" placeholder="Masukkan Deskripsi SIKENING . . .">{{ $deskripsi }}</textarea>
+                    <textarea class="form-control" name="deskripsi" id="deskripsi" rows="10" placeholder="Masukkan Deskripsi SIKENING . . ." required>{{ str_replace('<br />', '', $deskripsi) }}</textarea>
                   </div>
-                  <button type="button" class="btn btn-primary">Simpan</button>
+                  <button type="submit" class="btn btn-primary">Simpan</button>
                 </form>
               </div>
               <div class="col-md-4">
@@ -54,20 +55,17 @@
           <div class="card-body">
             <div class="row">
               <div class="col-md-6">
-                <form action="#" method="post">
+                <form action="/kelola-promo" method="POST">
+                  @csrf
                   <div class="form-group mb-3">
                     <label for="nama_promo">Nama Promo</label>
-                    <input type="text" class="form-control" name="" id="nama_promo" aria-describedby="helpId" placeholder="Nama Promo">
+                    <input type="text" class="form-control" name="nama" id="nama_promo" aria-describedby="helpId" placeholder="Nama Promo">
                   </div>
                   <div class="form-group mb-3">
                     <label for="tanggal_promo" class="form-label">Tanggal Akhir Promo</label>
-										<input type="date" id="tanggal_promo" class="form-control flatpickr-range" placeholder="Select date.." />
+										<input type="date" id="tanggal_promo" name="tanggal_akhir" class="form-control flatpickr-range" placeholder="Select date.." />
                   </div>
-                  <div class="form-group mb-3">
-                    <label for="deskripsi_promo">Deskripsi</label>
-                    <textarea class="form-control" name="" id="deskripsi_promo" rows="3" placeholder="Masukkan Deskripsi SIKENING . . ."></textarea>
-                  </div>
-                  <button type="button" class="btn btn-primary">Tambah Promo</button>
+                  <button type="submit" class="btn btn-primary">Tambah Promo</button>
                 </form>
               </div>
               <div class="col-md-6">
@@ -184,14 +182,24 @@
   </div>
   <!-- END Tambah Menu Modal -->
 
+  {{-- ALERT NOTIFICATION --}}
+  @if (session("pesan"))
+    <div class="notyf" style="justify-content: flex-end; align-items: flex-end;"><div id="notify-custom" class="notyf__toast notyf__toast--lower"><div class="notyf__wrapper"><div class="notyf__icon"><i class="notyf__icon--success" style="color: rgb(59, 125, 221);"></i></div><div class="notyf__message">{{ session("pesan") }}</div></div><div class="notyf__ripple" style="background: rgb(59, 125, 221);"></div></div></div>
+  @endif
+  
+
   {{-- END MENU --}}
 </main>
-  <script>
+<script>
 		document.addEventListener("DOMContentLoaded", function() {
 			// Datatables Responsive
 			$("#datatables-reponsive").DataTable({
 				responsive: true
 			});
+      const notify = document.getElementById("notify-custom")
+      setTimeout(() => {
+        notify.classList.add("notyf__toast--disappear")
+      }, 7500)
 		});
 	</script>
 @endsection

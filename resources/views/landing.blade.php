@@ -133,7 +133,7 @@ http://www.templatemo.com/tm-515-eatery
                           </div>
 
                           <div class="wow fadeInUp" data-wow-delay="0.4s">
-                                <p>{{ $deskripsi }}</p>
+                                <p>{!! $deskripsi !!}</p>
                           </div>
                       </div>
                 </div>
@@ -158,11 +158,20 @@ http://www.templatemo.com/tm-515-eatery
                               <h4>Jangan lewatkan promo dari kami</h4>
                          </div>
                     </div>
-                    <div class="col-md-12" style="background-color: #fefefe; color:#202020; border: solid 3px #202020; border-radius: 5px ">
-                         <a href="#" class="h5" style="width:100%; display:inline-block; padding: 5px"><span class="pull-left">Bonus Donut 1 Lusin Tiap Pembelian Melalui SIKENING</span>
-                              <span class="pull-right">Rabu, 12 November 2019</span>
+
+                    @if (count($promo) == 0)
+                    <div class="col-md-12" style="margin-bottom: 12px;background-color: #ff8888; color:#202020; border: solid 3px #202020; border-radius: 5px ">
+                         <a href="#" class="h5" style="width:100%; display:inline-block; padding: 5px; text-align: center">Belum ada promo yang ditawarkan oleh Cake Nining</a>
+                    </div>
+                    @endif
+
+                    @foreach ($promo as $pr)
+                    <div class="col-md-12" style="margin-bottom: 12px;background-color: #fefefe; color:#202020; border: solid 3px #202020; border-radius: 5px ">
+                         <a href="#" class="h5" style="width:100%; display:inline-block; padding: 5px"><span class="pull-left">{{ $pr->value }}</span>
+                              <span class="pull-right">Akan Berakhir {{ $waktu[$loop->iteration - 1] }}</span>
                          </a>
                     </div>
+                    @endforeach
                </div>
           </div>
      </section>

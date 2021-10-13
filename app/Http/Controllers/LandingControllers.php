@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Menu;
 use App\Models\Profile;
 use App\Models\Statistik;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -17,7 +18,13 @@ class LandingControllers extends Controller
 
         $deskripsi = Profile::where("nama", "deskripsi")->pluck("value")->first();
         $menu = Menu::orderBy("count", "DESC")->get()->take(6);
-        return view("landing", compact("deskripsi", "menu"));
+
+        $promo = Profile::where("nama", "promo")->get();
+        $waktu = [];
+        foreach ($promo as $pr) {
+            $waktu[] = Carbon::parse($pr->tanggal_akhir)->diffForHumans();
+        }
+        return view("landing", compact("deskripsi", "menu", "promo", "waktu"));
     }
     public function kirimPesan(Request $request)
     {

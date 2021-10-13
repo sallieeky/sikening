@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// ================================= PENGGUNA UMUM ======================================= \\
+
 Route::get('/', [LandingControllers::class, 'index']);
 Route::post('/', [LandingControllers::class, 'kirimPesan']);
 
@@ -36,6 +38,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/kelola', [DashboardControllers::class, 'kelola']);
     Route::get('/keuangan', [DashboardControllers::class, 'keuangan']);
     Route::get('/akun-pengguna', [DashboardControllers::class, 'akunPengguna']);
+
+    Route::post("/kelola-profile", [DashboardControllers::class, "kelolaProfile"]);
+    Route::post("/kelola-promo", [DashboardControllers::class, "kelolaPromo"]);
   });
 
 

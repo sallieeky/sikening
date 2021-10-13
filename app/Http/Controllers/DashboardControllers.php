@@ -35,6 +35,31 @@ class DashboardControllers extends Controller
         $deskripsi = Profile::where("nama", "deskripsi")->pluck("value")->first();
         return view("dashboard.kelola", compact("deskripsi"));
     }
+    public function kelolaProfile(Request $request)
+    {
+        $request->validate([
+            "deskripsi" => "required"
+        ]);
+        Profile::where("nama", "deskripsi")
+            ->update([
+                "value" => nl2br($request->deskripsi)
+            ]);
+        return back()->with("pesan", "Berhasil mengubah deskripsi Cake Nining");
+    }
+    public function kelolaPromo(Request $request)
+    {
+        $request->validate([
+            "nama" => "required",
+            "tanggal_akhir" => "required"
+        ]);
+        Profile::create([
+            "nama" => "promo",
+            "value" => $request->nama,
+            "tanggal_akhir" => $request->tanggal_akhir
+        ]);
+        return back()->with("pesan", "Berhasil menambah promo Cake Nining");
+    }
+
     public function keuangan()
     {
         return view("dashboard.keuangan");
