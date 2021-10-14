@@ -7,6 +7,7 @@ use App\Models\Menu;
 use App\Models\Profile;
 use App\Models\Statistik;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -33,7 +34,13 @@ class DashboardControllers extends Controller
     public function kelola()
     {
         $deskripsi = Profile::where("nama", "deskripsi")->pluck("value")->first();
-        return view("dashboard.kelola", compact("deskripsi"));
+        $promo = Profile::where("nama", "promo")->orderBy("tanggal_akhir")->get();
+
+        $waktu = [];
+        foreach ($promo as $pr) {
+            $waktu[] = Carbon::parse($pr->tanggal_akhir)->isoFormat('dddd, D MMMM Y');
+        }
+        return view("dashboard.kelola", compact("deskripsi", "promo", "waktu"));
     }
     public function kelolaProfile(Request $request)
     {

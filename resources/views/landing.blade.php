@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 
-     <title>Eatery Cafe and Restaurant Template</title>
+     <title>Cake Nining</title>
 <!-- 
 
 Eatery Cafe Template 
@@ -131,13 +131,11 @@ http://www.templatemo.com/tm-515-eatery
                                 <h4>Deskripsi</h4>
                                 <h2>Cake Nining</h2>
                           </div>
-
                           <div class="wow fadeInUp" data-wow-delay="0.4s">
                                 <p>{!! $deskripsi !!}</p>
                           </div>
                       </div>
                 </div>
-
                 <div class="col-md-6 col-sm-12">
                   <div class="wow fadeInUp" data-wow-delay="0.6s">
                       <img src="{{ asset("assets/logo.png") }}" class="img-responsive" style="width:60%; margin: auto" alt="">
@@ -168,7 +166,7 @@ http://www.templatemo.com/tm-515-eatery
                     @foreach ($promo as $pr)
                     <div class="col-md-12" style="margin-bottom: 12px;background-color: #fefefe; color:#202020; border: solid 3px #202020; border-radius: 5px ">
                          <a href="#" class="h5" style="width:100%; display:inline-block; padding: 5px"><span class="pull-left">{{ $pr->value }}</span>
-                              <span class="pull-right">Akan Berakhir {{ $waktu[$loop->iteration - 1] }}</span>
+                              <span class="pull-right"><strong>Hingga</strong> {{ $waktu[$loop->iteration - 1] }}</span>
                          </a>
                     </div>
                     @endforeach

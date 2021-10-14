@@ -78,25 +78,21 @@
 										</tr>
 									</thead>
 									<tbody>
+                    @if (count($promo) == 0)
                     <tr>
                       <td class="table-primary" colspan="3" style="text-align: center">Belum ada promo yang anda berikan</td>
                     </tr>
+                    @endif
+                    @foreach ($promo as $pr)
 										<tr>
-											<td>Vanessa Tucker</td>
-											<td class="d-none d-md-table-cell">June 21, 1961</td>
+											<td>{{ $pr->value }}</td>
+											<td class="d-none d-md-table-cell">{{ $waktu[$loop->iteration - 1] }}</td>
 											<td class="table-action">
 												<button class="btn btn-primary" href="#"><i class="align-middle" data-feather="edit-2"></i></button>
                         <button class="btn btn-danger" href="#"><i class="align-middle" data-feather="trash"></i></button>
 											</td>
 										</tr>
-										<tr>
-											<td>William Harris</td>
-											<td class="d-none d-md-table-cell">May 15, 1948</td>
-											<td class="table-action">
-												<button class="btn btn-primary" href="#"><i class="align-middle" data-feather="edit-2"></i></button>
-                        <button class="btn btn-danger" href="#"><i class="align-middle" data-feather="trash"></i></button>
-											</td>
-										</tr>
+                    @endforeach
 									</tbody>
 								</table>
               </div>

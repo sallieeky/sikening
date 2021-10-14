@@ -19,10 +19,10 @@ class LandingControllers extends Controller
         $deskripsi = Profile::where("nama", "deskripsi")->pluck("value")->first();
         $menu = Menu::orderBy("count", "DESC")->get()->take(6);
 
-        $promo = Profile::where("nama", "promo")->get();
+        $promo = Profile::where("nama", "promo")->orderBy("tanggal_akhir")->get();
         $waktu = [];
         foreach ($promo as $pr) {
-            $waktu[] = Carbon::parse($pr->tanggal_akhir)->diffForHumans();
+            $waktu[] = Carbon::parse($pr->tanggal_akhir)->isoFormat('dddd, D MMMM Y');
         }
         return view("landing", compact("deskripsi", "menu", "promo", "waktu"));
     }
