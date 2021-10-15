@@ -41,6 +41,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::post("/kelola-profile", [DashboardControllers::class, "kelolaProfile"]);
     Route::post("/kelola-promo", [DashboardControllers::class, "kelolaPromo"]);
+
+    Route::get("/promo-hapus/{id}", [DashboardControllers::class, "promoHapus"]);
   });
 
 

@@ -59,11 +59,11 @@
                   @csrf
                   <div class="form-group mb-3">
                     <label for="nama_promo">Nama Promo</label>
-                    <input type="text" class="form-control" name="nama" id="nama_promo" aria-describedby="helpId" placeholder="Nama Promo">
+                    <input type="text" class="form-control" name="nama" id="nama_promo" aria-describedby="helpId" placeholder="Nama Promo" required>
                   </div>
                   <div class="form-group mb-3">
                     <label for="tanggal_promo" class="form-label">Tanggal Akhir Promo</label>
-										<input type="date" id="tanggal_promo" name="tanggal_akhir" class="form-control flatpickr-range" placeholder="Select date.." />
+										<input type="date" id="tanggal_promo" name="tanggal_akhir" min="{{date("Y-m-d")}}" class="form-control flatpickr-range" placeholder="Select date.." / required>
                   </div>
                   <button type="submit" class="btn btn-primary">Tambah Promo</button>
                 </form>
@@ -88,8 +88,11 @@
 											<td>{{ $pr->value }}</td>
 											<td class="d-none d-md-table-cell">{{ $waktu[$loop->iteration - 1] }}</td>
 											<td class="table-action">
-												<button class="btn btn-primary" href="#"><i class="align-middle" data-feather="edit-2"></i></button>
-                        <button class="btn btn-danger" href="#"><i class="align-middle" data-feather="trash"></i></button>
+                        <form action="#" method="POST">
+                          @csrf
+                          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#promo-edit-{{ $pr->id }}"><i class="align-middle" data-feather="edit-2"></i></button>
+                          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#promo-hapus-{{ $pr->id }}"><i class="align-middle" data-feather="trash"></i></button>
+                        </form>
 											</td>
 										</tr>
                     @endforeach
@@ -177,6 +180,51 @@
     </div>
   </div>
   <!-- END Tambah Menu Modal -->
+  
+
+  @foreach ($promo as $pr)
+  <!-- Edit Promo Modal -->
+  <div class="modal fade" id="promo-edit-{{ $pr->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Promo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body m-3">
+          <p class="mb-0">Use Bootstrap’s JavaScript modal plugin to add dialogs to your site for lightboxes, user
+            notifications, or completely custom content.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+          <button type="button" class="btn btn-primary">Edit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END Tambah Menu Modal -->
+  
+  <!-- Hapus Promo Modal -->
+  <div class="modal fade" id="promo-hapus-{{ $pr->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Hapus Promo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body m-3">
+          <p class="mb-0">Apakah anda yakin untuk menghapus promo ini?</p>
+          <h5><strong>{{ $pr->value }}</strong></h5>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+          <a href="/promo-hapus/{{ $pr->id }}" class="btn btn-danger">Hapus</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END Tambah Menu Modal -->
+  @endforeach
 
   {{-- ALERT NOTIFICATION --}}
   @if (session("pesan"))

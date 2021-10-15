@@ -66,6 +66,11 @@ class DashboardControllers extends Controller
         ]);
         return back()->with("pesan", "Berhasil menambah promo Cake Nining");
     }
+    public function promoHapus(Profile $id)
+    {
+        $id->delete();
+        return back()->with("pesan", "Berhasil menghapus promo");
+    }
 
     public function keuangan()
     {
