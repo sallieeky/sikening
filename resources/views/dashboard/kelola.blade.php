@@ -191,18 +191,27 @@
           <h5 class="modal-title">Edit Promo</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <form action="promo-edit" method="POST">
+          @csrf
         <div class="modal-body m-3">
-          <p class="mb-0">Use Bootstrap’s JavaScript modal plugin to add dialogs to your site for lightboxes, user
-            notifications, or completely custom content.</p>
+          <div class="form-group mb-3">
+            <label for="nama_promo_edit">Nama Promo</label>
+            <input type="text" name="nama" id="nama_promo_edit" value="{{ $pr->value }}" required class="form-control" placeholder="Nama Promo" aria-describedby="helpId">
+          </div>
+          <div class="form-group mb-3">
+            <label for="tanggal_akhir_promo_edit">Tanggal Akhir Promo</label>
+            <input type="date" id="tanggal_akhir_promo_edit" required name="tanggal_akhir" value="{{ $pr->tanggal_akhir }}" min="{{date("Y-m-d")}}" class="form-control flatpickr-range" placeholder="Select date.." / required>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-          <button type="button" class="btn btn-primary">Edit</button>
+          <button type="submit" name="id" value="{{ $pr->id }}" class="btn btn-primary">Edit</button>
         </div>
+        </form>
       </div>
     </div>
   </div>
-  <!-- END Tambah Menu Modal -->
+  <!-- END Edit Promo Modal -->
   
   <!-- Hapus Promo Modal -->
   <div class="modal fade" id="promo-hapus-{{ $pr->id }}" tabindex="-1" role="dialog" aria-hidden="true">
@@ -223,7 +232,7 @@
       </div>
     </div>
   </div>
-  <!-- END Tambah Menu Modal -->
+  <!-- END Hapus Promo Modal -->
   @endforeach
 
   {{-- ALERT NOTIFICATION --}}

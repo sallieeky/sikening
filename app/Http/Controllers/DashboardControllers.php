@@ -71,6 +71,15 @@ class DashboardControllers extends Controller
         $id->delete();
         return back()->with("pesan", "Berhasil menghapus promo");
     }
+    public function promoEdit(Request $request)
+    {
+        Profile::where("id", $request->id)
+            ->update([
+                "value" => $request->nama,
+                "tanggal_akhir" => $request->tanggal_akhir
+            ]);
+        return back()->with("pesan", "Berhasil mengubah promo");
+    }
 
     public function keuangan()
     {
