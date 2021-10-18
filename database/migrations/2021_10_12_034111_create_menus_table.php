@@ -17,7 +17,6 @@ class CreateMenusTable extends Migration
             $table->id();
             $table->string("gambar");
             $table->string("nama");
-            $table->string("slug")->unique();
             $table->integer("harga");
             $table->string("kategori");
             $table->integer("count")->default(0);

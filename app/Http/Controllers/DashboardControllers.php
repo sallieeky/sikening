@@ -35,12 +35,13 @@ class DashboardControllers extends Controller
     {
         $deskripsi = Profile::where("nama", "deskripsi")->pluck("value")->first();
         $promo = Profile::where("nama", "promo")->orderBy("tanggal_akhir")->get();
+        $menu = Menu::all();
 
         $waktu = [];
         foreach ($promo as $pr) {
             $waktu[] = Carbon::parse($pr->tanggal_akhir)->isoFormat('dddd, D MMMM Y');
         }
-        return view("dashboard.kelola", compact("deskripsi", "promo", "waktu"));
+        return view("dashboard.kelola", compact("deskripsi", "promo", "waktu", "menu"));
     }
     public function kelolaProfile(Request $request)
     {
@@ -79,6 +80,18 @@ class DashboardControllers extends Controller
                 "tanggal_akhir" => $request->tanggal_akhir
             ]);
         return back()->with("pesan", "Berhasil mengubah promo");
+    }
+    public function menuTambah(Request $request)
+    {
+        Menu::create([
+            "nama" => $request->nama,
+            "gambar" => $request->file("gambar")->getClientOriginalName(),
+            "harga" => $request->harga,
+            "kategori" => $request->kategori,
+            "stok" => $request->stok,
+        ]);
+        $request->file("gambar")->storeAs("public/menu", $request->file("gambar")->getClientOriginalName());
+        return back()->with("pesan", "Berhasil menambahkan menu");
     }
 
     public function keuangan()

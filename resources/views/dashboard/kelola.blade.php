@@ -1,6 +1,18 @@
 @extends("base_views.dashboard")
 @section("linkcss")
   <link class="js-stylesheet" href="https://demo.adminkit.io/css/light.css" rel="stylesheet">
+  <style>
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+  </style>
 @endsection
 @section("kelola-active", "active")
 @section("main")
@@ -131,26 +143,20 @@
                 </tr>
               </thead>
               <tbody>
+                @foreach ($menu as $mn)
                 <tr>
-                  <td><img src="{{ asset("storage/menu/bolu_gulung.png") }}" alt="Bolu Gulung" style="max-height: 100px" class="img-responsive img-thumbnail"></td>
-                  <td>Bolu Gulung</td>
-                  <td>12</td>
-                  <td>Rp. {{ number_format(12000,2,",",".") }}</td>
+                  <td><img src="{{ asset("storage/menu/" . $mn->gambar) }}" alt="Bolu Gulung" style="max-height: 100px" class="img-responsive img-thumbnail"></td>
+                  <td>{{ $mn->nama }}</td>
+                  <td>{{ $mn->stok }}</td>
+                  <td>Rp. {{ number_format($mn->harga,2,",",".") }}</td>
                   <td class="table-action">
-                    <button class="btn btn-primary" href="#"><i class="align-middle" data-feather="edit-2"></i></button>
-                    <button class="btn btn-danger" href="#"><i class="align-middle" data-feather="trash"></i></button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-menu-modal-{{ $mn->id }}">
+                      Ubah
+                    </button>
+                    <button class="btn btn-danger" href="#">Hapus</button>
                   </td>
                 </tr>
-                <tr>
-                  <td><img src="{{ asset("storage/menu/gabin_fla.jpg") }}" alt="Gabin Fla" style="max-height: 100px" class="img-responsive img-thumbnail"></td>
-                  <td>Gabin Fla</td>
-                  <td>13</td>
-                  <td>Rp. {{ number_format(12000,2,",",".") }}</td>
-                  <td class="table-action">
-                    <button class="btn btn-primary" href="#"><i class="align-middle" data-feather="edit-2"></i></button>
-                    <button class="btn btn-danger" href="#"><i class="align-middle" data-feather="trash"></i></button>
-                  </td>
-                </tr>
+                @endforeach
               </tbody>
             </table>
           </div>
@@ -169,17 +175,105 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body m-3">
-          <p class="mb-0">Use Bootstrap’s JavaScript modal plugin to add dialogs to your site for lightboxes, user
-            notifications, or completely custom content.</p>
+          <form action="/menu-tambah" method="POST" enctype="multipart/form-data">
+            @csrf
+          <div class="form-group mb-3">
+            <label for="gambar-menu">Gambar</label><br>
+            <img src="" alt="Pilih Gambar" style="height: 200px" id="img-menu" class="img img-thumbnail my-3">
+            <input type="file" required name="gambar" id="gambar-menu" class="form-control" aria-describedby="helpId">
+          </div>
+          <div class="form-group mb-3">
+            <label for="nama-menu-modal">Nama Menu</label><br>
+            <input type="text" required name="nama" placeholder="Risol Mayo" id="nama-menu-modal" class="form-control" aria-describedby="helpId">
+          </div>
+          <div class="form-group mb-3">
+            <label for="harga-menu-modal">Harga</label>
+            <div class="input-group">
+              <span class="input-group-text">Rp.</span>
+              <input required type="number" name="harga" id="harga-menu-modal" class="form-control" placeholder="5000" aria-label="Dollar amount (with dot and two decimal places)">
+            </div>
+          </div>
+          <div class="form-group mb-3">
+            <label for="stok-menu-modal">Stok</label>
+            <input required type="number" name="stok" id="stok-menu-modal" class="form-control" placeholder="12">
+          </div>
+          <div class="form-group mb-3">
+          <label for="stok-menu-modal">Kategori</label>
+          <div class="input-group">
+            <select class="form-select" required name="kategori" id="inputGroupSelect01">
+              <option selected>Pilih Kategori</option>
+              <option value="Kue Basah">Kue Basah</option>
+              <option value="Kue Kering">Kue Kering</option>
+              <option value="Gorengan">Gorengan</option>
+            </select>
+          </div>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-          <button type="button" class="btn btn-primary">Tambah Menu</button>
+          <button type="submit" class="btn btn-primary">Tambah</button>
         </div>
+      </form>
       </div>
     </div>
   </div>
   <!-- END Tambah Menu Modal -->
+
+
+  <!-- Edit Menu Modal -->
+  @foreach ($menu as $mn)
+  <div class="modal fade" id="edit-menu-modal-{{ $mn->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Menu</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body m-3">
+          <form action="#" method="POST" enctype="multipart/form-data">
+            @csrf
+          <div class="form-group mb-3">
+            <label for="gambar-menu">Gambar</label><br>
+            <img src="" alt="Pilih Gambar" style="height: 200px" id="img-menu" class="img img-thumbnail my-3">
+            <input type="file" name="" id="gambar-menu" class="form-control" aria-describedby="helpId">
+          </div>
+          <div class="form-group mb-3">
+            <label for="nama-menu-modal">Nama Menu</label><br>
+            <input type="text" name="" value="{{ $mn->nama }}" placeholder="Risol Mayo" id="nama-menu-modal" class="form-control" aria-describedby="helpId">
+          </div>
+          <div class="form-group mb-3">
+            <label for="harga-menu-modal">Harga</label>
+            <div class="input-group">
+              <span class="input-group-text">Rp.</span>
+              <input type="number" id="harga-menu-modal" class="form-control" placeholder="5000" aria-label="Dollar amount (with dot and two decimal places)">
+            </div>
+          </div>
+          <div class="form-group mb-3">
+            <label for="stok-menu-modal">Stok</label>
+            <input type="number" id="stok-menu-modal" class="form-control" placeholder="12">
+          </div>
+          <div class="form-group mb-3">
+          <label for="stok-menu-modal">Kategori</label>
+          <div class="input-group">
+            <select class="form-select" id="inputGroupSelect01">
+              <option selected>Pilih Kategori</option>
+              <option value="Kue Basah">Kue Basah</option>
+              <option value="Kue Kering">Kue Kering</option>
+              <option value="Gorengan">Gorengan</option>
+            </select>
+          </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+          <button type="submit" class="btn btn-primary">Tambah</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+  @endforeach
+  <!-- END Edit Menu Modal -->
   
 
   @foreach ($promo as $pr)
@@ -254,5 +348,15 @@
         notify.classList.add("notyf__toast--disappear")
       }, 7500)
 		});
+
+  const img_btn = document.getElementById("gambar-menu")
+  const img = document.getElementById("img-menu")
+
+  img_btn.onchange = evt => {
+    const [file] = img_btn.files
+    if (file) {
+        img.src = URL.createObjectURL(file)
+    }
+  }
 	</script>
 @endsection

@@ -18,7 +18,7 @@
 	<title>SIKENING</title>
 
 	<link href="{{ asset("dashboard_assets") }}/css/app.css" rel="stylesheet">
-
+	
 	@yield("linkcss")
 
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
@@ -40,8 +40,7 @@
 						<a class="sidebar-link" href="/dashboard">
               <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
             </a>
-					</li>
-
+					</li>					
 					<li class="sidebar-item @yield("profile-active")">
 						<a class="sidebar-link" href="/profile">
               <i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
