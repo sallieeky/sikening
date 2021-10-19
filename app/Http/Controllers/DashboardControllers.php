@@ -83,6 +83,13 @@ class DashboardControllers extends Controller
     }
     public function menuTambah(Request $request)
     {
+        $request->validate([
+            "nama" => "required",
+            "gambar" => "required",
+            "harga" => "required",
+            "kategori" => "required",
+            "stok" => "required"
+        ]);
         Menu::create([
             "nama" => $request->nama,
             "gambar" => $request->file("gambar")->getClientOriginalName(),
@@ -92,6 +99,28 @@ class DashboardControllers extends Controller
         ]);
         $request->file("gambar")->storeAs("public/menu", $request->file("gambar")->getClientOriginalName());
         return back()->with("pesan", "Berhasil menambahkan menu");
+    }
+    public function menuHapus(Menu $id)
+    {
+        $id->delete();
+        return back()->with("pesan", "Berhasil menghapus menu");
+    }
+    public function menuEdit(Request $request)
+    {
+        $gambar = $request->gambar_backup;
+        if ($request->gambar) {
+            $gambar = $request->file("gambar")->getClientOriginalName();
+            $request->file("gambar")->storeAs("public/menu", $request->file("gambar")->getClientOriginalName());
+        }
+        Menu::where("id", $request->id)
+            ->update([
+                "nama" => $request->nama,
+                "gambar" => $gambar,
+                "harga" => $request->harga,
+                "kategori" => $request->kategori,
+                "stok" => $request->stok
+            ]);
+        return back()->with("pesan", "Berhasil mengubah data menu");
     }
 
     public function keuangan()

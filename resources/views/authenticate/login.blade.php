@@ -28,7 +28,7 @@
 										@csrf
 										<div class="mb-3">
 											<label class="form-label">Email</label>
-											<input class="form-control form-control-lg @error("email") is-invalid @enderror" type="email" name="email" placeholder="Masukkan Emailmu" value="{{ old("email") }}" />
+											<input class="form-control form-control-lg @error("email") is-invalid @enderror" type="email" name="email" placeholder="Masukkan Email" value="{{ old("email") }}" />
 											@error("email")
 												<div id="validationServer03Feedback" class="invalid-feedback">
 													{{ $message }}
@@ -37,7 +37,7 @@
 										</div>
 										<div class="mb-3">
 											<label class="form-label">Password</label>
-											<input class="form-control form-control-lg @error("password") is-invalid @enderror" type="password" name="password" placeholder="Masukkan Passwordmu" />
+											<input class="form-control form-control-lg @error("password") is-invalid @enderror" type="password" name="password" placeholder="Masukkan Password" />
 											@error("password")
 												<div class="invalid-feedback">
 													{{ $message }}

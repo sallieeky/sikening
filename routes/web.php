@@ -45,7 +45,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get("/promo-hapus/{id}", [DashboardControllers::class, "promoHapus"]);
     Route::post("/promo-edit", [DashboardControllers::class, "promoEdit"]);
 
+    Route::get("/menu-hapus/{id}", [DashboardControllers::class, "menuHapus"]);
     Route::post("/menu-tambah", [DashboardControllers::class, "menuTambah"]);
+    Route::post("/menu-edit", [DashboardControllers::class, "menuEdit"]);
   });
 
 

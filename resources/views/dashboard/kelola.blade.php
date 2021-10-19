@@ -150,10 +150,8 @@
                   <td>{{ $mn->stok }}</td>
                   <td>Rp. {{ number_format($mn->harga,2,",",".") }}</td>
                   <td class="table-action">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-menu-modal-{{ $mn->id }}">
-                      Ubah
-                    </button>
-                    <button class="btn btn-danger" href="#">Hapus</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-menu-modal-{{ $mn->id }}">Ubah</button>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#hapus-menu-modal-{{ $mn->id }}">Hapus</button>
                   </td>
                 </tr>
                 @endforeach
@@ -201,7 +199,6 @@
           <label for="stok-menu-modal">Kategori</label>
           <div class="input-group">
             <select class="form-select" required name="kategori" id="inputGroupSelect01">
-              <option selected>Pilih Kategori</option>
               <option value="Kue Basah">Kue Basah</option>
               <option value="Kue Kering">Kue Kering</option>
               <option value="Gorengan">Gorengan</option>
@@ -220,8 +217,8 @@
   <!-- END Tambah Menu Modal -->
 
 
-  <!-- Edit Menu Modal -->
   @foreach ($menu as $mn)
+  <!-- Edit Menu Modal -->
   <div class="modal fade" id="edit-menu-modal-{{ $mn->id }}" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -230,50 +227,71 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body m-3">
-          <form action="#" method="POST" enctype="multipart/form-data">
+          <form action="/menu-edit" method="POST" enctype="multipart/form-data">
             @csrf
+            <input type="hidden" name="gambar_backup" value="{{ $mn->gambar }}">
           <div class="form-group mb-3">
-            <label for="gambar-menu">Gambar</label><br>
-            <img src="" alt="Pilih Gambar" style="height: 200px" id="img-menu" class="img img-thumbnail my-3">
-            <input type="file" name="" id="gambar-menu" class="form-control" aria-describedby="helpId">
+            <label>Gambar</label><br>
+            <img src="{{ asset("storage/menu/" . $mn->gambar) }}" alt="Pilih Gambar" style="height: 200px" id="img-menu-edit" class="img img-thumbnail my-3">
+            <input type="file" name="gambar" id="gambar-menu-edit" class="form-control" aria-describedby="helpId">
           </div>
           <div class="form-group mb-3">
             <label for="nama-menu-modal">Nama Menu</label><br>
-            <input type="text" name="" value="{{ $mn->nama }}" placeholder="Risol Mayo" id="nama-menu-modal" class="form-control" aria-describedby="helpId">
+            <input type="text" name="nama" value="{{ $mn->nama }}" required placeholder="Risol Mayo" id="nama-menu-modal" class="form-control" aria-describedby="helpId">
           </div>
           <div class="form-group mb-3">
             <label for="harga-menu-modal">Harga</label>
             <div class="input-group">
               <span class="input-group-text">Rp.</span>
-              <input type="number" id="harga-menu-modal" class="form-control" placeholder="5000" aria-label="Dollar amount (with dot and two decimal places)">
+              <input type="number" id="harga-menu-modal" name="harga" required class="form-control" value="{{ $mn->harga }}" placeholder="5000" aria-label="Dollar amount (with dot and two decimal places)">
             </div>
           </div>
           <div class="form-group mb-3">
             <label for="stok-menu-modal">Stok</label>
-            <input type="number" id="stok-menu-modal" class="form-control" placeholder="12">
+            <input type="number" id="stok-menu-modal" name="stok" required class="form-control" placeholder="12" value="{{ $mn->stok }}">
           </div>
           <div class="form-group mb-3">
           <label for="stok-menu-modal">Kategori</label>
           <div class="input-group">
-            <select class="form-select" id="inputGroupSelect01">
-              <option selected>Pilih Kategori</option>
-              <option value="Kue Basah">Kue Basah</option>
-              <option value="Kue Kering">Kue Kering</option>
-              <option value="Gorengan">Gorengan</option>
+            <select class="form-select" required name="kategori" id="inputGroupSelect01">
+              <option @if($mn->kategori == "Kue Basah") selected @endif value="Kue Basah">Kue Basah</option>
+              <option @if($mn->kategori == "Kue Kering") selected @endif value="Kue Kering">Kue Kering</option>
+              <option @if($mn->kategori == "Gorengan") selected @endif value="Gorengan">Gorengan</option>
             </select>
           </div>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-          <button type="submit" class="btn btn-primary">Tambah</button>
+          <button type="submit" class="btn btn-primary" name="id" value="{{ $mn->id }}">Edit</button>
         </div>
       </form>
       </div>
     </div>
   </div>
-  @endforeach
   <!-- END Edit Menu Modal -->
+  
+  <!-- Hapus Menu Modal -->
+  <div class="modal fade" id="hapus-menu-modal-{{ $mn->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Hapus Menu</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body m-3">
+          <p class="mb-0">Apakah anda yakin untuk menghapus menu ini?</p>
+          <h5><strong>{{ $mn->nama }}</strong></h5>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+          <a href="/menu-hapus/{{ $mn->id }}" class="btn btn-danger">Hapus</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END Hapus Menu Modal -->
+  @endforeach
   
 
   @foreach ($promo as $pr)
@@ -329,11 +347,15 @@
   <!-- END Hapus Promo Modal -->
   @endforeach
 
-  {{-- ALERT NOTIFICATION --}}
+  {{-- ALERT BERHASIL --}}
   @if (session("pesan"))
     <div class="notyf" style="justify-content: flex-end; align-items: flex-end;"><div id="notify-custom" class="notyf__toast notyf__toast--lower"><div class="notyf__wrapper"><div class="notyf__icon"><i class="notyf__icon--success" style="color: rgb(59, 125, 221);"></i></div><div class="notyf__message">{{ session("pesan") }}</div></div><div class="notyf__ripple" style="background: rgb(59, 125, 221);"></div></div></div>
   @endif
   
+  {{-- ALERT ERROR TAMBAH DATA --}}
+  @if ($errors->any())
+    <div class="notyf" style="justify-content: flex-end; align-items: flex-end;"><div id="notify-custom" class="notyf__toast notyf__toast--lower"><div class="notyf__wrapper"><div class="notyf__icon"><i class="notyf__icon--danger" style="color: #DC3646;"></i></div><div class="notyf__message">{{ session("pesan") }}</div></div><div class="notyf__ripple" style="background: rgb(59, 125, 221);"></div></div></div>
+  @endif
 
   {{-- END MENU --}}
 </main>
@@ -351,11 +373,19 @@
 
   const img_btn = document.getElementById("gambar-menu")
   const img = document.getElementById("img-menu")
+  const img_btn_edit = document.getElementById("gambar-menu-edit")
+  const img_edit = document.getElementById("img-menu-edit")
 
   img_btn.onchange = evt => {
     const [file] = img_btn.files
     if (file) {
         img.src = URL.createObjectURL(file)
+    }
+  }
+  img_btn_edit.onchange = evt => {
+    const [file] = img_btn_edit.files
+    if (file) {
+        img_edit.src = URL.createObjectURL(file)
     }
   }
 	</script>
