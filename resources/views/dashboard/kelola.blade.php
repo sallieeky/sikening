@@ -182,18 +182,18 @@
           </div>
           <div class="form-group mb-3">
             <label for="nama-menu-modal">Nama Menu</label><br>
-            <input type="text" required name="nama" placeholder="Risol Mayo" id="nama-menu-modal" class="form-control" aria-describedby="helpId">
+            <input type="text" required name="nama" placeholder="Nama Menu" id="nama-menu-modal" class="form-control" aria-describedby="helpId">
           </div>
           <div class="form-group mb-3">
             <label for="harga-menu-modal">Harga</label>
             <div class="input-group">
               <span class="input-group-text">Rp.</span>
-              <input required type="number" name="harga" id="harga-menu-modal" class="form-control" placeholder="5000" aria-label="Dollar amount (with dot and two decimal places)">
+              <input required type="number" name="harga" id="harga-menu-modal" class="form-control" placeholder="Harga" aria-label="Dollar amount (with dot and two decimal places)">
             </div>
           </div>
           <div class="form-group mb-3">
             <label for="stok-menu-modal">Stok</label>
-            <input required type="number" name="stok" id="stok-menu-modal" class="form-control" placeholder="12">
+            <input required type="number" name="stok" id="stok-menu-modal" class="form-control" placeholder="Stok">
           </div>
           <div class="form-group mb-3">
           <label for="stok-menu-modal">Kategori</label>
@@ -237,18 +237,18 @@
           </div>
           <div class="form-group mb-3">
             <label for="nama-menu-modal">Nama Menu</label><br>
-            <input type="text" name="nama" value="{{ $mn->nama }}" required placeholder="Risol Mayo" id="nama-menu-modal" class="form-control" aria-describedby="helpId">
+            <input type="text" name="nama" value="{{ $mn->nama }}" required placeholder="Nama Menu" id="nama-menu-modal" class="form-control" aria-describedby="helpId">
           </div>
           <div class="form-group mb-3">
             <label for="harga-menu-modal">Harga</label>
             <div class="input-group">
               <span class="input-group-text">Rp.</span>
-              <input type="number" id="harga-menu-modal" name="harga" required class="form-control" value="{{ $mn->harga }}" placeholder="5000" aria-label="Dollar amount (with dot and two decimal places)">
+              <input type="number" id="harga-menu-modal" name="harga" required class="form-control" value="{{ $mn->harga }}" placeholder="Harga" aria-label="Dollar amount (with dot and two decimal places)">
             </div>
           </div>
           <div class="form-group mb-3">
             <label for="stok-menu-modal">Stok</label>
-            <input type="number" id="stok-menu-modal" name="stok" required class="form-control" placeholder="12" value="{{ $mn->stok }}">
+            <input type="number" id="stok-menu-modal" name="stok" required class="form-control" placeholder="Stok" value="{{ $mn->stok }}">
           </div>
           <div class="form-group mb-3">
           <label for="stok-menu-modal">Kategori</label>

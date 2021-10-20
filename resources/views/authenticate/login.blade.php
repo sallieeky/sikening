@@ -44,7 +44,7 @@
 												</div>
 											@enderror
 											<small>
-                        <a href="index.html">Lupa Password?</a>
+                        <a href="/forgot-password">Lupa Password?</a>
                       </small>
 										</div>
 										<div class="text-center mt-3">
