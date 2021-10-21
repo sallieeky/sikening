@@ -36,6 +36,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
   Route::get('/dashboard', [DashboardControllers::class, 'index']);
   Route::get('/profile', [DashboardControllers::class, 'profile']);
 
+  Route::post("/profile-public-info", [DashboardControllers::class, "profilePublicInfo"]);
+  Route::post("/profile-private-info", [DashboardControllers::class, "profilePrivateInfo"]);
+
+
   // ############## HALAMAN ADMIN AJA YANG BISA AKSES ############# \\
   Route::middleware(['admin'])->group(function () {
     Route::get('/kelola', [DashboardControllers::class, 'kelola']);

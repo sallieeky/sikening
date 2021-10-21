@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class AuthControllers extends Controller
 {
@@ -60,7 +61,8 @@ class AuthControllers extends Controller
         $user = User::create([
             "nama" => $request->nama,
             "email" => $request->email,
-            "password" => bcrypt($request->password)
+            "password" => bcrypt($request->password),
+            "remember_token" => Str::random(60)
         ]);
         event(new Registered($user));
         Auth::login($user);

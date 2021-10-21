@@ -27,10 +27,56 @@ class DashboardControllers extends Controller
             return view("dashboard.dashboard_user", compact("menu_terlaris"));
         }
     }
+
+    // ================================================= HALAMAN PROFILE ========================================== \\ 
+
     public function profile()
     {
         return view("dashboard.profile");
     }
+    public function profilePublicInfo(Request $request)
+    {
+        $request->validate([
+            "nama" => "required",
+            "status" => "required|max:1000",
+        ]);
+        if ($request->foto) {
+            $foto = $request->file("foto")->getClientOriginalName();
+            $request->file("foto")->storeAs("public/users", $foto);
+        } else {
+            $foto = $request->foto_backup;
+        }
+        User::where("id", Auth::user()->id)
+            ->update([
+                "nama" => $request->nama,
+                "status" => $request->status,
+                "foto" => $foto
+            ]);
+        return back()->with("pesan", "Berhasil menyimpan data");
+    }
+    public function profilePrivateInfo(Request $request)
+    {
+        $request->validate([
+            "alamat" => "required",
+            "kota" => "required",
+            "provinsi" => "required",
+            "kode_pos" => "required|numeric|digits:5",
+        ]);
+        User::where("id", Auth::user()->id)
+            ->update([
+                "alamat" => $request->alamat,
+                "kota" => $request->kota,
+                "provinsi" => $request->provinsi,
+                "kode_pos" => $request->kode_pos,
+            ]);
+        return back()->with("pesan", "Berhasil menyimpan data");
+    }
+
+    // =============================================== END HALAMAN PROFILE ========================================== \\ 
+
+
+    // ================================================== HALAMAN KELOLA =========================================== \\ 
+
     public function kelola()
     {
         $deskripsi = Profile::where("nama", "deskripsi")->pluck("value")->first();
@@ -122,6 +168,9 @@ class DashboardControllers extends Controller
             ]);
         return back()->with("pesan", "Berhasil mengubah data menu");
     }
+
+    // ================================================ END HALAMAN KELOLA ========================================== \\ 
+
 
     public function keuangan()
     {
