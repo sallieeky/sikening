@@ -22,80 +22,25 @@
           <div class="card-body">
             <div class="container">
               <div class="row">
-                  @foreach ($menu_terlaris as $mt)
-                  <div class="col-md-3 col-sm-6">
-                      <div class="product-grid" style="border-radius: 5px">
-                          <div class="product-image">
-                              <a href="#" class="image">
-                                  <img class="pic-1" style="height: 150px; object-fit: cover" src="{{ asset("storage/menu/" . $mt->gambar) }}">
-                                  <img class="pic-2" style="height: 150px; object-fit: cover" src="{{ asset("storage/menu/" . $mt->gambar) }}">
-                              </a>
-                              <span class="product-sale-label">hot</span>
-                          </div>
-                          <div class="product-content">
-                              <h3 class="title"><a href="#">{{ $mt->nama }}</a></h3>
-                              <div class="price"> Rp. {{ number_format($mt->harga,2,",",".") }}</div>
-                              <div class="product-button-group">
-                                  <a class="add-to-cart" href="#"><i class="fa fa-shopping-bag"></i>ADD TO CART</a>
-                              </div>
-                          </div>
+                @foreach ($menu_terlaris as $mt)
+                <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+                  <div class="card">
+                    <img class="card-img" style="height: 200px; object-fit: cover" src="{{ asset("storage/menu/" . $mt->gambar) }}" alt="{{ $mt->nama }}">
+                    <div class="card-body">
+                      <h4 class="card-title">{{ $mt->nama }}</h4>
+                      <h6 class="card-subtitle mb-2 text-muted">Kategori : {{ $mt->kategori }}</h6>
+                      <h6 class="card-subtitle mb-2 text-muted">Sisa Stok : {{ $mt->stok }}</h6>
+                      <div class="options d-flex flex-fill my-1">
+                        <input type="number" class="form-control" name="jumlah" id="jumlah" min="1" max="{{ $mt->stok }}" placeholder="Jumlah">
                       </div>
+                      <div class="buy d-flex justify-content-between align-items-center">
+                        <div class="price text-success"><h5 class="mt-4">Rp. {{ number_format($mt->harga,2,",",".") }}</h5></div>
+                         <a href="#" class="btn btn-danger mt-3"><i class="align-middle" data-feather="shopping-cart"></i> Masukkan keranjang</a>
+                      </div>
+                    </div>
                   </div>
+                </div>
                   @endforeach
-                  {{-- <div class="col-md-3 col-sm-6">
-                      <div class="product-grid">
-                          <div class="product-image">
-                              <a href="#" class="image">
-                                <img class="pic-1" style="height: 150px; object-fit: cover" src="{{ asset("storage/menu/risoles.jpg") }}">
-                                <img class="pic-2"style="height: 150px; object-fit: cover" src="{{ asset("storage/menu/risoles.jpg") }}">
-                              </a>
-                              <span class="product-sale-label">hot</span>
-                          </div>
-                          <div class="product-content">
-                              <h3 class="title"><a href="#">Women's Shirt</a></h3>
-                              <div class="price"><span>$30.00</span>$12.30</div>
-                              <div class="product-button-group">
-                                  <a class="add-to-cart" href="#"><i class="fa fa-shopping-bag"></i>ADD TO CART</a>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                      <div class="product-grid">
-                          <div class="product-image">
-                              <a href="#" class="image">
-                                <img class="pic-1" style="height: 150px; object-fit: cover" src="{{ asset("storage/menu/risoles.jpg") }}">
-                                <img class="pic-2"style="height: 150px; object-fit: cover" src="{{ asset("storage/menu/risoles.jpg") }}">
-                              </a>
-                              <span class="product-sale-label">hot</span>
-                          </div>
-                          <div class="product-content">
-                              <h3 class="title"><a href="#">Women's Shirt</a></h3>
-                              <div class="price">$12.30</div>
-                              <div class="product-button-group">
-                                  <a class="add-to-cart" href="#"><i class="fa fa-shopping-bag"></i>ADD TO CART</a>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-md-3 col-sm-6">
-                      <div class="product-grid">
-                          <div class="product-image">
-                              <a href="#" class="image">
-                                <img class="pic-1" style="height: 150px; object-fit: cover" src="{{ asset("storage/menu/risoles.jpg") }}">
-                                <img class="pic-2"style="height: 150px; object-fit: cover" src="{{ asset("storage/menu/risoles.jpg") }}">
-                              </a>
-                              <span class="product-sale-label">hot</span>
-                          </div>
-                          <div class="product-content">
-                              <h3 class="title"><a href="#">Women's Shirt</a></h3>
-                              <div class="price">$12.30</div>
-                              <div class="product-button-group">
-                                  <a class="add-to-cart" href="#"><i class="fa fa-shopping-bag"></i>ADD TO CART</a>
-                              </div>
-                          </div>
-                      </div>
-                  </div> --}}
               </div>
             </div>
           </div>
@@ -114,19 +59,35 @@
             <h5 class="card-title mb-0">Aktifitas</h5>
           </div>
           <div class="card-body h-100">
-
+            @foreach (Auth::user()->aktifitas as $akt)
             <div class="d-flex align-items-start">
-              <img src="{{ asset("dashboard_assets") }}/img/avatars/avatar-5.jpg" width="36" height="36" class="rounded-circle me-2" alt="Vanessa Tucker">
+              <img src="{{ asset("storage/users/" . Auth::user()->foto) }}" width="36" height="36" class="rounded-circle me-2" alt="{{ Auth::user()->nama }}">
               <div class="flex-grow-1">
-                <small class="float-end text-navy">5m ago</small>
-                <strong>Vanessa Tucker</strong> started following <strong>Christina Mason</strong><br />
-                <small class="text-muted">Today 7:51 pm</small><br />
-
+                <small class="float-end text-navy">{{ $akt->created_at->diffForHumans() }}</small>
+                <strong>{{ Auth::user()->nama }}</strong> {{ $akt->keterangan_aktifitas }} <br />
+                <small class="text-muted">{{ $akt->created_at->format("l, j F Y H:m") }}</small><br />
               </div>
             </div>
-
             <hr />
+            @endforeach
             <div class="d-flex align-items-start">
+              <img src="{{ asset("dashboard_assets") }}/img/avatars/avatar-2.jpg" width="36" height="36" class="rounded-circle me-2" alt="William Harris">
+              <div class="flex-grow-1">
+                <small class="float-end text-navy">3h ago</small>
+                <strong>William Harris</strong> posted two photos on <strong>Christina Mason</strong>'s timeline<br />
+                <small class="text-muted">Today 5:12 pm</small>
+
+                <div class="row g-0 mt-1">
+                  <div class="col-6 col-md-4 col-lg-4 col-xl-3">
+                    <img src="{{ asset("dashboard_assets") }}/img/photos/unsplash-1.jpg" class="img-fluid pe-2" alt="Unsplash">
+                  </div>
+                  <div class="col-6 col-md-4 col-lg-4 col-xl-3">
+                    <img src="{{ asset("dashboard_assets") }}/img/photos/unsplash-2.jpg" class="img-fluid pe-2" alt="Unsplash">
+                  </div>
+                </div>
+              </div>
+            </div>
+            {{-- <div class="d-flex align-items-start">
               <img src="{{ asset("dashboard_assets") }}/img/avatars/avatar.jpg" width="36" height="36" class="rounded-circle me-2" alt="Charles Hall">
               <div class="flex-grow-1">
                 <small class="float-end text-navy">30m ago</small>
@@ -184,8 +145,8 @@
 
                 <div class="d-flex align-items-start mt-1">
                   <a class="pe-3" href="#">
-          <img src="{{ asset("dashboard_assets") }}/img/avatars/avatar-4.jpg" width="36" height="36" class="rounded-circle me-2" alt="Christina Mason">
-        </a>
+                    <img src="{{ asset("dashboard_assets") }}/img/avatars/avatar-4.jpg" width="36" height="36" class="rounded-circle me-2" alt="Christina Mason">
+                  </a>
                   <div class="flex-grow-1">
                     <div class="border text-sm text-muted p-2 mt-1">
                       Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus.
@@ -219,7 +180,7 @@
             <div class="d-grid">
               <a href="#" class="btn btn-primary">Load more</a>
             </div>
-          </div>
+          </div> --}}
         </div>
       </div>
     </div>

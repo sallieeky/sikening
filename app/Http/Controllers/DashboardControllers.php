@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Aktifitas;
 use App\Models\Keranjang;
 use App\Models\Menu;
 use App\Models\Profile;
@@ -23,7 +24,7 @@ class DashboardControllers extends Controller
             $menu_terlaris = Menu::orderBy("count", "DESC")->get()->take(5);
             return view("dashboard.dashboard_admin", compact("pengunjung", "menu_terlaris"));
         } else {
-            $menu_terlaris = Menu::orderBy("count", "DESC")->get()->take(4);
+            $menu_terlaris = Menu::orderBy("count", "DESC")->get()->take(3);
             return view("dashboard.dashboard_user", compact("menu_terlaris"));
         }
     }
@@ -52,6 +53,10 @@ class DashboardControllers extends Controller
                 "status" => $request->status,
                 "foto" => $foto
             ]);
+        Aktifitas::create([
+            "user_id" => Auth::user()->id,
+            "keterangan_aktifitas" => "Mengubah public info"
+        ]);
         return back()->with("pesan", "Berhasil menyimpan data");
     }
     public function profilePrivateInfo(Request $request)
@@ -69,6 +74,10 @@ class DashboardControllers extends Controller
                 "provinsi" => $request->provinsi,
                 "kode_pos" => $request->kode_pos,
             ]);
+        Aktifitas::create([
+            "user_id" => Auth::user()->id,
+            "keterangan_aktifitas" => "Mengubah private info"
+        ]);
         return back()->with("pesan", "Berhasil menyimpan data");
     }
 

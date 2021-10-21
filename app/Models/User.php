@@ -60,7 +60,7 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
     }
     public function aktifitas()
     {
-        return $this->hasMany(Aktifitas::class);
+        return $this->hasMany(Aktifitas::class)->latest();
     }
     public function keuangan()
     {
