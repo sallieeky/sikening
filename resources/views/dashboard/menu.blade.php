@@ -2,7 +2,7 @@
 @section("menu-active", "active")
 @section("linkcss")
   <link rel="stylesheet" href="{{ asset("assets/css/dashboard_product.css") }}">
-
+  <link class="js-stylesheet" href="https://demo.adminkit.io/css/light.css" rel="stylesheet">
   <style>
     .product-grid:hover {
       background-color: #E3C26980; 
@@ -36,13 +36,16 @@
                       <h4 class="card-title">{{ $mn->nama }}</h4>
                       <h6 class="card-subtitle mb-2 text-muted">Kategori : {{ $mn->kategori }}</h6>
                       <h6 class="card-subtitle mb-2 text-muted">Sisa Stok : {{ $mn->stok }}</h6>
+                      <form action="/tambah-keranjang/{{ $mn->id }}" method="POST">
+                        @csrf
                       <div class="options d-flex flex-fill my-1">
                           <input type="number" class="form-control" name="jumlah" id="jumlah" min="1" max="{{ $mn->stok }}" placeholder="Jumlah">
                       </div>
                       <div class="buy d-flex justify-content-between align-items-center">
                         <div class="price text-success"><h5 class="mt-4">Rp. {{ number_format($mn->harga,2,",",".") }}</h5></div>
-                         <a href="#" class="btn btn-danger mt-3"><i class="align-middle" data-feather="shopping-cart"></i> Masukkan keranjang</a>
+                         <button type="submit" class="btn btn-danger mt-3"><i class="align-middle" data-feather="shopping-cart"></i> Masukkan keranjang</button>
                       </div>
+                    </form>
                     </div>
                   </div>
                 </div>
@@ -54,9 +57,30 @@
       </div>
     </div>
   </div>
+
+  {{-- ALERT BERHASIL --}}
+  @if (session("pesan"))
+  <div class="notyf" style="justify-content: flex-end; align-items: flex-end;"><div id="notify-custom" class="notyf__toast notyf__toast--lower"><div class="notyf__wrapper"><div class="notyf__icon"><i class="notyf__icon--success" style="color: rgb(59, 125, 221);"></i></div><div class="notyf__message">{{ session("pesan") }}</div></div><div class="notyf__ripple" style="background: rgb(59, 125, 221);"></div></div></div>
+  @endif
+
+  {{-- ALERT ERROR --}}
+  @if ($errors->any())
+    <div class="notyf" style="justify-content: flex-end; align-items: flex-end;"><div id="notify-custom-eror" class="notyf__toast notyf__toast--lower"><div class="notyf__wrapper"><div class="notyf__icon"><i class="notyf__icon--danger" style="color: #DC3646;"></i></div><div class="notyf__message">{{ $errors->all()[0] }}</div></div><div class="notyf__ripple" style="background: #DC3646;"></div></div></div>
+  @endif
+
 </main>
 
 <script>
+
+const notify = document.getElementById("notify-custom")
+      setTimeout(() => {
+        notify.classList.add("notyf__toast--disappear")
+      }, 7500)
+const notify2 = document.getElementById("notify-custom-eror")
+      setTimeout(() => {
+        notify2.classList.add("notyf__toast--disappear")
+      }, 7500)
+
 function myFunctionSearch() {
   var input, filter, cards, cardContainer, title, i;
   input = document.getElementById("myFilter");

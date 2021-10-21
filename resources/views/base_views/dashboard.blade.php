@@ -54,6 +54,7 @@
 					<li class="sidebar-item @yield("keranjang-active")">
 						<a class="sidebar-link" href="/keranjang">
 							<i class="align-middle" data-feather="shopping-cart"></i> <span class="align-middle">Keranjang</span>
+							<span class="sidebar-badge badge bg-primary">{{ count(Auth::user()->keranjang->where("status", "belum")) }}</span>
 						</a>
 					</li>
 					<li class="sidebar-item @yield("invoice-active")">

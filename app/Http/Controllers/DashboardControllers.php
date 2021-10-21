@@ -203,10 +203,64 @@ class DashboardControllers extends Controller
     {
         return view("dashboard.invoice");
     }
+
+    // ================================================ HALAMAN KERANJANG ========================================== \\ 
+
     public function keranjang()
     {
-        return view("dashboard.keranjang");
+        $keranjang = Keranjang::where([
+            ["user_id", "=", Auth::user()->id],
+            ["status", "=", "belum"],
+        ])->get();
+
+        $total = 0;
+        foreach ($keranjang as $krj) {
+            $total += $krj->menu->harga * $krj->jumlah;
+        }
+
+        return view("dashboard.keranjang", compact("keranjang", "total"));
     }
+    public function tambahKeranjang(Menu $menu, Request $request)
+    {
+        $request->validate([
+            "jumlah" => "required"
+        ]);
+        $kode_keranjang = Keranjang::where([
+            ["status", "=", "belum"],
+            ["user_id", "=", Auth::user()->id]
+        ])->pluck("kode_keranjang")->first();
+
+        if ($kode_keranjang) {
+            $cek_menu = Keranjang::where([
+                ["status", "=", "belum"],
+                ["user_id", "=", Auth::user()->id],
+                ["menu_id", "=", $menu->id]
+            ])->first();
+            if ($cek_menu) {
+                Keranjang::where("menu_id", $menu->id)
+                    ->update([
+                        "jumlah" => $request->jumlah
+                    ]);
+                return back()->with("pesan", "Berhasil menambahkan ke keranjang");
+            }
+        } else {
+            $kode_keranjang = "k_" . Auth::user()->id . "_" . rand(10000, 99999);
+        }
+        Keranjang::create([
+            "kode_keranjang" => $kode_keranjang,
+            "user_id" => Auth::user()->id,
+            "menu_id" => $menu->id,
+            "jumlah" => $request->jumlah
+        ]);
+        return back()->with("pesan", "Berhasil menambahkan ke keranjang");
+    }
+    public function hapusKeranjang(Keranjang $id)
+    {
+        $id->delete();
+        return back()->with("pesan", "Berhasil menghapus menu dari keranjang");
+    }
+
+    // =============================================== END HALAMAN KERANJANG ======================================== \\ 
     public function checkout(Request $request)
     {
         if ($request->checkout) {

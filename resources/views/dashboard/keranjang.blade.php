@@ -1,5 +1,6 @@
 @extends("base_views.dashboard")
 @section("linkcss")
+<link class="js-stylesheet" href="https://demo.adminkit.io/css/light.css" rel="stylesheet">
   <style>
     /* Chrome, Safari, Edge, Opera */
     input::-webkit-outer-spin-button,
@@ -23,49 +24,49 @@
             <div class="col-lg-8">
                 <div class="card wish-list mb-3">
                     <div class="card-body">
-                        <h5 class="mb-4">Cart (<span>2</span> items)</h5>
+                        <h5 class="mb-4 card-title">Keranjang (<span>{{ count($keranjang) }}</span> Item)</h5>
+                        @if (count($keranjang) == 0)
+                            <div class="alert alert-primary p-3" role="alert">
+                                <p class="mb-0">Anda belum memasukkan item kedalam keranjang</p>
+                            </div>
+                        @endif
+                        @foreach ($keranjang as $krj)
                         <div class="row mb-4">
                             <div class="col-md-5 col-lg-3 col-xl-3">
                                 <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
-                                    <img class="img-fluid w-100" src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg" alt="Sample">
+                                    <img class="img-fluid w-100" src="{{ asset("storage/menu/" . $krj->menu->gambar) }}" alt="{{ $krj->menu->nama }}">
                                 </div>
                             </div>
                             <div class="col-md-7 col-lg-9 col-xl-9">
                                 <div>
                                     <div class="d-flex justify-content-between">
                                         <div>
-                                            <h5>Blue denim shirt</h5>
-                                            <p class="mb-3 text-muted text-uppercase small">Shirt - blue</p>
-                                            <p class="mb-2 text-muted text-uppercase small">Color: blue</p>
-                                            <p class="mb-3 text-muted text-uppercase small">Size: M</p>
+                                            <h5>{{ $krj->menu->nama }}</h5>
+                                            <p class="mb-3 text-muted text-uppercase small">{{ $krj->menu->kategori }}</p>
+                                            <p class="mb-3 text-muted text-uppercase small">Harga : Rp. {{ number_format($krj->menu->harga,2,",",".")  }}</p>
                                         </div>
                                         <div>
                                             <div class="def-number-input number-input safari_only mb-0 w-100">
-                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
-                                                class="btn btn-sm btn-outline-primary"><i class="align-middle" data-feather="minus-square"></i></button>
-                                                <input class="quantity" disabled min="1" name="quantity" value="1" type="number">
-                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
-                                                class="btn btn-sm btn-outline-primary"><i class="align-middle" data-feather="plus-square"></i></button>
+                                                {{-- <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                                                class="btn btn-sm btn-outline-primary"><i class="align-middle" data-feather="minus-square"></i></button> --}}
+                                                <label for="">Jumlah : &nbsp;</label><input class="quantity" disabled min="1" name="quantity" value="{{ $krj->jumlah }}" type="number">
+                                                {{-- <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                                                class="btn btn-sm btn-outline-primary"><i class="align-middle" data-feather="plus-square"></i></button> --}}
                                             </div>
-                                            <small id="passwordHelpBlock" class="form-text text-muted text-center">
-                                                (Note, 1 piece)
-                                            </small>
                                         </div>
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div>
-                                            <a href="#!" type="button" class="card-link-secondary small text-uppercase mr-3"><i class="align-middle" data-feather="trash-2"></i> Remove item </a>
+                                            <a href="/hapus-keranjang/{{ $krj->id }}" type="button" class="card-link-primary small text-uppercase mr-3 text-danger"><i class="align-middle" data-feather="trash-2"></i> Hapus Item </a>
                                         </div>
-                                        <p class="mb-0"><span><strong>$17.99</strong></span></p>
+                                        <p class="mb-0"><span><strong>Rp. {{ number_format($krj->menu->harga * $krj->jumlah,2,",",".")  }}</strong></span></p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <hr class="mb-4">
-
-
-                        <p class="text-primary mb-0"><i class="align-middle" data-feather="info"></i> Do not delay the purchase, adding
-                        items to your cart does not mean booking them.</p>
+                        @endforeach
+                        <p class="text-primary mb-0"><i class="align-middle" data-feather="info"></i> Jangan telat untuk melakukan pembayaran agar kami dapat melayani anda dengan maksimal</p>
             
                     </div>
                 </div>
@@ -96,24 +97,24 @@
             <div class="col-lg-4">
                 <div class="card mb-3">
                     <div class="card-body">
-                        <h5 class="mb-3">The total amount of</h5>
+                        <h5 class="mb-3">Total biaya</h5>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
-                                Temporary amount
-                                <span>$25.98</span>
+                                Total menu
+                                <span>Rp. {{ number_format($total,2,",",".")  }}</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                Shipping
-                                <span>Gratis</span>
+                                Biaya Pengiriman
+                                <span>Rp. 0 - 8.000,00</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
                                 <div>
-                                    <strong>The total amount of</strong>
-                                    <strong>
+                                    <strong>Total</strong>
+                                    {{-- <strong>
                                         <p class="mb-0">(including VAT)</p>
-                                    </strong>
+                                    </strong> --}}
                                 </div>
-                                <span><strong>$53.98</strong></span>
+                                <span><strong>Rp. {{ number_format($total,2,",",".")  }}</strong></span>
                             </li>
                         </ul>
                         <a href="/checkout?checkout=true" type="button" class="btn btn-primary btn-block waves-effect waves-light">go to checkout</a>
@@ -132,11 +133,19 @@
         </div>    
     </section>
   </div>
+
+  {{-- ALERT BERHASIL --}}
+@if (session("pesan"))
+<div class="notyf" style="justify-content: flex-end; align-items: flex-end;"><div id="notify-custom" class="notyf__toast notyf__toast--lower"><div class="notyf__wrapper"><div class="notyf__icon"><i class="notyf__icon--success" style="color: rgb(59, 125, 221);"></i></div><div class="notyf__message">{{ session("pesan") }}</div></div><div class="notyf__ripple" style="background: rgb(59, 125, 221);"></div></div></div>
+@endif
 </main>
 
 <script>
 
-
+const notify = document.getElementById("notify-custom")
+      setTimeout(() => {
+        notify.classList.add("notyf__toast--disappear")
+      }, 7500)
 
 
 

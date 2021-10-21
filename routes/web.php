@@ -64,6 +64,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/invoice', [DashboardControllers::class, 'invoice']);
     Route::get('/keranjang', [DashboardControllers::class, 'keranjang']);
     Route::get('/checkout', [DashboardControllers::class, 'checkout']);
+
+    Route::post("/tambah-keranjang/{menu}", [DashboardControllers::class, "tambahKeranjang"]);
+    Route::get("/hapus-keranjang/{id}", [DashboardControllers::class, "hapusKeranjang"]);
   });
 });
 
