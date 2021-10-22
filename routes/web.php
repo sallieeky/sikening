@@ -67,6 +67,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::post("/tambah-keranjang/{menu}", [DashboardControllers::class, "tambahKeranjang"]);
     Route::get("/hapus-keranjang/{id}", [DashboardControllers::class, "hapusKeranjang"]);
+    Route::post('/checkout', [DashboardControllers::class, 'checkoutPost']);
   });
 });
 

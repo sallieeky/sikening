@@ -27,7 +27,7 @@
                         <h5 class="mb-4 card-title">Keranjang (<span>{{ count($keranjang) }}</span> Item)</h5>
                         @if (count($keranjang) == 0)
                             <div class="alert alert-primary p-3" role="alert">
-                                <p class="mb-0">Anda belum memasukkan item kedalam keranjang</p>
+                                <p class="mb-0">Keranjang anda masih kosong, silakan untuk memesan pada <a href="/menu">menu sikening</a></p>
                             </div>
                         @endif
                         @foreach ($keranjang as $krj)
@@ -67,29 +67,42 @@
                         <hr class="mb-4">
                         @endforeach
                         <p class="text-primary mb-0"><i class="align-middle" data-feather="info"></i> Jangan telat untuk melakukan pembayaran agar kami dapat melayani anda dengan maksimal</p>
-            
+                    </div>
+                </div>
+                @if (count($keranjang) != 0)
+                <form action="/checkout" method="GET">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="mb-3 card-title">Tanggal Pengambilan / Pengiriman</h5>
+                        <input required type="date" name="tanggal_pengambilan" class="form-control" min="{{date("Y-m-d")}}">
+                        <small>*pilih tanggal anda ingin dikirim atau mengambil</small>
                     </div>
                 </div>
                 <div class="card mb-3">
                     <div class="card-body">
-                        <h5 class="mb-4">Expected shipping delivery</h5>
-                        <p class="mb-0"> Thu., 12.03. - Mon., 16.03.</p>
+                        <h5 class="mb-4 card-title">Pilih Metode Pembayaran</h5>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" value="langsung" type="radio" name="metode_pembayaran" id="metode_pembayaran2" checked>
+                            <label class="form-check-label" for="metode_pembayaran2">
+                              <strong>( Ambil Sendiri )</strong> Pembayaran langsung di Cake Nining <br>
+                              <img class="mt-2" height="76px"
+                              src="{{ asset("assets/logo.png") }}"
+                              alt="American Express">
+                            </label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" value="bni" type="radio" name="metode_pembayaran" id="metode_pembayaran1">
+                            <label class="form-check-label" for="metode_pembayaran1">
+                                <strong>( Diantar )</strong> Rekening BNI <br>
+                                <img class="mt-2" width="100px"
+                                src="{{ asset("assets/logobni.svg") }}"
+                                alt="Visa">
+                            </label>
+                        </div>
                     </div>
                 </div>
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h5 class="mb-4">We accept</h5>
-                        <img class="mr-2" width="45px"
-                        src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
-                        alt="Visa">
-                        <img class="mr-2" width="45px"
-                        src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
-                        alt="American Express">
-                        <img class="mr-2" width="45px"
-                        src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
-                        alt="Mastercard">
-                    </div>
-                </div>
+            @endif    
+
                 <!-- Card -->
         
             </div>
@@ -97,10 +110,10 @@
             <div class="col-lg-4">
                 <div class="card mb-3">
                     <div class="card-body">
-                        <h5 class="mb-3">Total biaya</h5>
+                        <h5 class="mb-2 card-title">Total biaya</h5>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
-                                Total menu
+                                Total Menu
                                 <span>Rp. {{ number_format($total,2,",",".")  }}</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center px-0">
@@ -117,19 +130,11 @@
                                 <span><strong>Rp. {{ number_format($total,2,",",".")  }}</strong></span>
                             </li>
                         </ul>
-                        <a href="/checkout?checkout=true" type="button" class="btn btn-primary btn-block waves-effect waves-light">go to checkout</a>
+                        <button @if(count($keranjang) == 0) disabled @endif type="submit" name="checkout" value="true" class="btn btn-primary btn-block waves-effect waves-light">Checkout keranjang</b>
+                        </form>
                     </div>
                 </div>
-                <div class="card mb-3">
-                    <div class="card-body">
-                        {{-- <a class="dark-grey-text d-flex justify-content-between" data-toggle="collapse" href="#collapseExample1"
-                        aria-expanded="false" aria-controls="collapseExample1">
-                        Add a discount code (optional)
-                        <span><i class="fas fa-chevron-down pt-1"></i></span>
-                        </a> --}}
-                    </div>
-                </div>
-            </div>    
+            </div>
         </div>    
     </section>
   </div>

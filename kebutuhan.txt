@@ -1,3 +1,9 @@
+ADMIN SIDEBAR TAMBAH
+- Halaman Pemesanan
+- Halaman Pembayaran
+
+
+
 DIMENU KUE KASI KATEGORI
 
 1. Dapat menampilkan menu-menu dan harga yang ada di Cake Nining

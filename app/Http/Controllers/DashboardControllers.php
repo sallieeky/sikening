@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Aktifitas;
+use App\Models\Invoice;
 use App\Models\Keranjang;
 use App\Models\Menu;
 use App\Models\Profile;
@@ -55,7 +56,7 @@ class DashboardControllers extends Controller
             ]);
         Aktifitas::create([
             "user_id" => Auth::user()->id,
-            "keterangan_aktifitas" => "Mengubah public info"
+            "keterangan_aktifitas" => "Mengubah info publik"
         ]);
         return back()->with("pesan", "Berhasil menyimpan data");
     }
@@ -76,7 +77,7 @@ class DashboardControllers extends Controller
             ]);
         Aktifitas::create([
             "user_id" => Auth::user()->id,
-            "keterangan_aktifitas" => "Mengubah private info"
+            "keterangan_aktifitas" => "Mengubah info pribadi"
         ]);
         return back()->with("pesan", "Berhasil menyimpan data");
     }
@@ -252,11 +253,21 @@ class DashboardControllers extends Controller
             "menu_id" => $menu->id,
             "jumlah" => $request->jumlah
         ]);
+
+        Aktifitas::create([
+            "user_id" => Auth::user()->id,
+            "keterangan_aktifitas" => "Menambahkan $menu->nama kedalam keranjang",
+            "lampiran_1" => $menu->gambar
+        ]);
         return back()->with("pesan", "Berhasil menambahkan ke keranjang");
     }
     public function hapusKeranjang(Keranjang $id)
     {
         $id->delete();
+        Aktifitas::create([
+            "user_id" => Auth::user()->id,
+            "keterangan_aktifitas" => "Menghapus " . $id->menu->nama . " dari keranjang",
+        ]);
         return back()->with("pesan", "Berhasil menghapus menu dari keranjang");
     }
 
@@ -264,10 +275,57 @@ class DashboardControllers extends Controller
     public function checkout(Request $request)
     {
         if ($request->checkout) {
-            return view("dashboard.checkout");
+            $keranjang = Keranjang::where([
+                ["user_id", "=", Auth::user()->id],
+                ["status", "=", "belum"],
+            ])->get();
+
+            $total = 0;
+            foreach ($keranjang as $krj) {
+                $total += $krj->menu->harga * $krj->jumlah;
+            }
+
+            $metode_pembayaran = $request->metode_pembayaran;
+            $tanggal = Carbon::parse($request->tanggal_pengambilan)->isoFormat('dddd, D MMMM Y');
+            $tanggal_pengambilan = $request->tanggal_pengambilan;
+            return view("dashboard.checkout", compact("total", "metode_pembayaran", "tanggal", "tanggal_pengambilan", "keranjang"));
         } else {
             return back();
         }
+    }
+    public function checkoutPost(Request $request)
+    {
+        $kode_pembayaran = "p_" . Auth::user()->id . "_" . rand(10000, 99999);
+        $bukti_pembayaran = "bayar ditempat";
+
+        if ($request->bukti_pembayaran) {
+            $bukti_pembayaran = $request->file("bukti_pembayaran")->getClientOriginalName();
+            $request->file("bukti_pembayaran")->storeAs("public/bukti_pembayaran", $request->file("bukti_pembayaran")->getClientOriginalName());
+        }
+
+        Invoice::create([
+            "user_id" => Auth::user()->id,
+            "kode_pembayaran" => $kode_pembayaran,
+            "kode_keranjang" => $request->kode_keranjang,
+            "metode_pembayaran" => $request->metode_pembayaran,
+            "total_pembayaran" => $request->total_pembayaran,
+            "tanggal_pengambilan" => $request->tanggal_pengambilan,
+            "bukti_pembayaran" => $bukti_pembayaran
+        ]);
+
+        Keranjang::where([
+            ["user_id", "=", Auth::user()->id],
+            ["status", "=", "belum"],
+        ])->update([
+            "status" => "sudah"
+        ]);
+
+        Aktifitas::create([
+            "user_id" => Auth::user()->id,
+            "keterangan_aktifitas" => "Melakukan checkout keranjang dengan kode pembayaran #$kode_pembayaran",
+        ]);
+
+        return redirect("/invoice");
     }
 
     // =========================================== END USER =========================================== \\

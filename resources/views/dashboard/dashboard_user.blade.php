@@ -64,34 +64,27 @@
             <h5 class="card-title mb-0">Aktifitas</h5>
           </div>
           <div class="card-body h-100">
-            @foreach (Auth::user()->aktifitas as $akt)
+            @foreach (Auth::user()->aktifitas->take(10) as $akt)
             <div class="d-flex align-items-start">
               <img src="{{ asset("storage/users/" . Auth::user()->foto) }}" width="36" height="36" class="rounded-circle me-2" alt="{{ Auth::user()->nama }}">
               <div class="flex-grow-1">
                 <small class="float-end text-navy">{{ $akt->created_at->diffForHumans() }}</small>
                 <strong>{{ Auth::user()->nama }}</strong> {{ $akt->keterangan_aktifitas }} <br />
                 <small class="text-muted">{{ $akt->created_at->format("l, j F Y H:m") }}</small><br />
+                
+                @if ($akt->lampiran_1)
+                <div class="row g-0 mt-1">
+                  <div class="col-6 col-md-4 col-lg-4 col-xl-3">
+                    <img src="{{ asset("storage/menu/" . $akt->lampiran_1) }}" class="img-fluid pe-2" alt="{{ $akt->lampiran_1 }}">
+                  </div>
+                </div>
+                @endif
+
               </div>
             </div>
             <hr />
+                
             @endforeach
-            <div class="d-flex align-items-start">
-              <img src="{{ asset("dashboard_assets") }}/img/avatars/avatar-2.jpg" width="36" height="36" class="rounded-circle me-2" alt="William Harris">
-              <div class="flex-grow-1">
-                <small class="float-end text-navy">3h ago</small>
-                <strong>William Harris</strong> posted two photos on <strong>Christina Mason</strong>'s timeline<br />
-                <small class="text-muted">Today 5:12 pm</small>
-
-                <div class="row g-0 mt-1">
-                  <div class="col-6 col-md-4 col-lg-4 col-xl-3">
-                    <img src="{{ asset("dashboard_assets") }}/img/photos/unsplash-1.jpg" class="img-fluid pe-2" alt="Unsplash">
-                  </div>
-                  <div class="col-6 col-md-4 col-lg-4 col-xl-3">
-                    <img src="{{ asset("dashboard_assets") }}/img/photos/unsplash-2.jpg" class="img-fluid pe-2" alt="Unsplash">
-                  </div>
-                </div>
-              </div>
-            </div>
             {{-- <div class="d-flex align-items-start">
               <img src="{{ asset("dashboard_assets") }}/img/avatars/avatar.jpg" width="36" height="36" class="rounded-circle me-2" alt="Charles Hall">
               <div class="flex-grow-1">

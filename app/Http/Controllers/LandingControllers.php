@@ -33,6 +33,6 @@ class LandingControllers extends Controller
             $message->to('sikening.a6@gmail.com', 'Cake Nining');
             $message->subject($request->subject);
         });
-        return redirect("/#contact-form");
+        return redirect("/#contact-form")->with("pesan", "Berhasil mengirim pesan");
     }
 }

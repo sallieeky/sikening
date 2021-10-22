@@ -20,6 +20,7 @@ class CreateInvoicesTable extends Migration
             $table->string("kode_keranjang");
             $table->string("metode_pembayaran");
             $table->integer("total_pembayaran");
+            $table->date("tanggal_pengambilan")->nullable();
             $table->string("bukti_pembayaran")->default("belum");
             $table->timestamps();
         });

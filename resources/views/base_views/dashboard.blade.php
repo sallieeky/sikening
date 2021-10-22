@@ -78,6 +78,11 @@
               <i class="align-middle" data-feather="dollar-sign"></i> <span class="align-middle">Kelola Keuangan</span>
             </a>
 					</li>
+					<li class="sidebar-item @yield("keuangan-active")">
+						<a class="sidebar-link" href="/pesanan">
+              <i class="align-middle" data-feather="dollar-sign"></i> <span class="align-middle">Kelola Pesanan</span>
+            </a>
+					</li>
 					<li class="sidebar-item @yield("akun_pengguna-active")">
 						<a class="sidebar-link" href="/akun-pengguna">
               <i class="align-middle" data-feather="user"></i> <span class="align-middle">Akun Pengguna</span>

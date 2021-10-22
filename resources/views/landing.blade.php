@@ -17,6 +17,15 @@ http://www.templatemo.com/tm-515-eatery
      <meta name="author" content="">
      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
+     {{-- <link class="js-stylesheet" href="https://demo.adminkit.io/css/light.css" rel="stylesheet"> --}}
+
+     <style>
+
+          @-webkit-keyframes notyf-fadeinup{0%{opacity:0;transform:translateY(25%)}to{opacity:1;transform:translateY(0)}}@keyframes notyf-fadeinup{0%{opacity:0;transform:translateY(25%)}to{opacity:1;transform:translateY(0)}}@-webkit-keyframes notyf-fadeinleft{0%{opacity:0;transform:translateX(25%)}to{opacity:1;transform:translateX(0)}}@keyframes notyf-fadeinleft{0%{opacity:0;transform:translateX(25%)}to{opacity:1;transform:translateX(0)}}@-webkit-keyframes notyf-fadeoutright{0%{opacity:1;transform:translateX(0)}to{opacity:0;transform:translateX(25%)}}@keyframes notyf-fadeoutright{0%{opacity:1;transform:translateX(0)}to{opacity:0;transform:translateX(25%)}}@-webkit-keyframes notyf-fadeoutdown{0%{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(25%)}}@keyframes notyf-fadeoutdown{0%{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(25%)}}@-webkit-keyframes ripple{0%{transform:scale(0) translateY(-45%) translateX(13%)}to{transform:scale(1) translateY(-45%) translateX(13%)}}@keyframes ripple{0%{transform:scale(0) translateY(-45%) translateX(13%)}to{transform:scale(1) translateY(-45%) translateX(13%)}}.notyf{align-items:flex-end;box-sizing:border-box;color:#fff;display:flex;flex-direction:column;height:100%;justify-content:flex-end;left:0;padding:20px;pointer-events:none;position:fixed;top:0;width:100%;z-index:9999}.notyf__icon--error,.notyf__icon--success{background:#fff;border-radius:50%;display:block;height:21px;margin:0 auto;position:relative;width:21px}.notyf__icon--error:after,.notyf__icon--error:before{background:currentColor;border-radius:3px;content:"";display:block;height:12px;left:9px;position:absolute;top:5px;width:3px}.notyf__icon--error:after{transform:rotate(-45deg)}.notyf__icon--error:before{transform:rotate(45deg)}.notyf__icon--success:after,.notyf__icon--success:before{background:currentColor;border-radius:3px;content:"";display:block;position:absolute;width:3px}.notyf__icon--success:after{height:6px;left:6px;top:9px;transform:rotate(-45deg)}.notyf__icon--success:before{height:11px;left:10px;top:5px;transform:rotate(45deg)}.notyf__toast{-webkit-animation:notyf-fadeinup .3s ease-in forwards;animation:notyf-fadeinup .3s ease-in forwards;border-radius:2px;box-shadow:0 3px 7px 0 rgba(0,0,0,.25);box-sizing:border-box;display:block;flex-shrink:0;max-width:300px;overflow:hidden;padding:0 15px;pointer-events:auto;position:relative;transform:translateY(25%)}.notyf__toast--disappear{-webkit-animation:notyf-fadeoutdown .3s forwards;animation:notyf-fadeoutdown .3s forwards;-webkit-animation-delay:.25s;animation-delay:.25s;transform:translateY(0)}.notyf__toast--disappear .notyf__icon,.notyf__toast--disappear .notyf__message{-webkit-animation:notyf-fadeoutdown .3s forwards;animation:notyf-fadeoutdown .3s forwards;opacity:1;transform:translateY(0)}.notyf__toast--disappear .notyf__dismiss{-webkit-animation:notyf-fadeoutright .3s forwards;animation:notyf-fadeoutright .3s forwards;opacity:1;transform:translateX(0)}.notyf__toast--disappear .notyf__message{-webkit-animation-delay:.05s;animation-delay:.05s}.notyf__toast--upper{margin-bottom:20px}.notyf__toast--lower{margin-top:20px}.notyf__toast--dismissible .notyf__wrapper{padding-right:30px}.notyf__ripple{-webkit-animation:ripple .4s ease-out forwards;animation:ripple .4s ease-out forwards;border-radius:50%;height:400px;position:absolute;right:0;top:0;transform:scale(0) translateY(-51%) translateX(13%);transform-origin:bottom right;width:400px;z-index:5}.notyf__wrapper{align-items:center;border-radius:3px;display:flex;padding-bottom:17px;padding-right:15px;padding-top:17px;position:relative;z-index:10}.notyf__icon{-webkit-animation:notyf-fadeinup .3s forwards;animation:notyf-fadeinup .3s forwards;-webkit-animation-delay:.3s;animation-delay:.3s;font-size:1.3em;margin-right:13px;opacity:0;text-align:center;width:22px}.notyf__dismiss{-webkit-animation:notyf-fadeinleft .3s forwards;animation:notyf-fadeinleft .3s forwards;-webkit-animation-delay:.35s;animation-delay:.35s;height:100%;margin-right:-15px;opacity:0;position:absolute;right:0;top:0;width:26px}.notyf__dismiss-btn{background-color:rgba(0,0,0,.25);border:none;cursor:pointer;height:100%;opacity:.35;outline:none;transition:opacity .2s ease,background-color .2s ease;width:100%}.notyf__dismiss-btn:after,.notyf__dismiss-btn:before{background:#fff;border-radius:3px;content:"";height:12px;left:calc(50% - 1px);position:absolute;top:calc(50% - 5px);width:2px}.notyf__dismiss-btn:after{transform:rotate(-45deg)}.notyf__dismiss-btn:before{transform:rotate(45deg)}.notyf__dismiss-btn:hover{background-color:rgba(0,0,0,.15);opacity:.7}.notyf__dismiss-btn:active{opacity:.8}.notyf__message{-webkit-animation:notyf-fadeinup .3s forwards;animation:notyf-fadeinup .3s forwards;-webkit-animation-delay:.25s;animation-delay:.25s;line-height:1.5em;opacity:0;position:relative;vertical-align:middle}@media only screen and (max-width:480px){.notyf{padding:0}.notyf__ripple{-webkit-animation-duration:.5s;animation-duration:.5s;height:600px;width:600px}.notyf__toast{border-radius:0;box-shadow:0 -2px 7px 0 rgba(0,0,0,.13);max-width:none;width:100%}.notyf__dismiss{width:56px}}
+
+     </style>
+
+
      <link rel="stylesheet" href="{{ asset("landing_assets") }}/css/bootstrap.min.css">
      <link rel="stylesheet" href="{{ asset("landing_assets") }}/css/font-awesome.min.css">
      <link rel="stylesheet" href="{{ asset("landing_assets") }}/css/animate.css">
@@ -60,11 +69,11 @@ http://www.templatemo.com/tm-515-eatery
                <!-- MENU LINKS -->
                <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-nav-first">
-                         <li><a href="#home" class="smoothScroll">Home</a></li>
-                         <li><a href="#about" class="smoothScroll">About</a></li>
-                         <li><a href="#team" class="smoothScroll">Chef</a></li>
+                         <li><a href="#home" class="smoothScroll">Beranda</a></li>
+                         <li><a href="#about" class="smoothScroll">Tentang</a></li>
+                         <li><a href="#team" class="smoothScroll">Promo</a></li>
                          <li><a href="#menu" class="smoothScroll">Menu</a></li>
-                         <li><a href="#contact" class="smoothScroll">Contact</a></li>
+                         <li><a href="#contact" class="smoothScroll">Kontak</a></li>
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
@@ -179,14 +188,12 @@ http://www.templatemo.com/tm-515-eatery
      <section id="menu" data-stellar-background-ratio="0.5">
           <div class="container">
                <div class="row">
-
                     <div class="col-md-12 col-sm-12">
                          <div class="section-title wow fadeInUp" data-wow-delay="0.1s">
-                              <h2>Our Menus</h2>
-                              <h4>Tea Time &amp; Dining</h4>
+                              <h2>Menu Kami</h2>
+                              <h4>Daftar menu terbaik kami</h4>
                          </div>
                     </div>
-
                     @foreach ($menu as $mn)
                     <div class="col-md-4 col-sm-6">
                          <!-- MENU THUMB -->
@@ -206,151 +213,9 @@ http://www.templatemo.com/tm-515-eatery
                          </div>
                     </div>
                     @endforeach
-
-                    {{-- <div class="col-md-4 col-sm-6">
-                         <!-- MENU THUMB -->
-                         <div class="menu-thumb">
-                              <a href="{{ asset("landing_assets") }}/images/menu-image2.jpg" class="image-popup" title="Self-made Salad">
-                                   <img src="{{ asset("landing_assets") }}/images/menu-image2.jpg" class="img-responsive" alt="">
-
-                                   <div class="menu-info">
-                                        <div class="menu-item">
-                                             <h3>Self-made Salad</h3>
-                                             <p>Green / Fruits / Healthy</p>
-                                        </div>
-                                        <div class="menu-price">
-                                             <span>$18</span>
-                                        </div>
-                                   </div>
-                              </a>
-                         </div>
-                    </div>
-
-                    <div class="col-md-4 col-sm-6">
-                         <!-- MENU THUMB -->
-                         <div class="menu-thumb">
-                              <a href="{{ asset("landing_assets") }}/images/menu-image3.jpg" class="image-popup" title="Chinese Noodle">
-                                   <img src="{{ asset("landing_assets") }}/images/menu-image3.jpg" class="img-responsive" alt="">
-
-                                   <div class="menu-info">
-                                        <div class="menu-item">
-                                             <h3>Chinese Noodle</h3>
-                                             <p>Pepper / Chicken / Vegetables</p>
-                                        </div>
-                                        <div class="menu-price">
-                                             <span>$34</span>
-                                        </div>
-                                   </div>
-                              </a>
-                         </div>
-                    </div>
-
-                    <div class="col-md-4 col-sm-6">
-                         <!-- MENU THUMB -->
-                         <div class="menu-thumb">
-                              <a href="{{ asset("landing_assets") }}/images/menu-image4.jpg" class="image-popup" title="Rice Soup">
-                                   <img src="{{ asset("landing_assets") }}/images/menu-image4.jpg" class="img-responsive" alt="">
-
-                                   <div class="menu-info">
-                                        <div class="menu-item">
-                                             <h3>Rice Soup</h3>
-                                             <p>Green / Chicken</p>
-                                        </div>
-                                        <div class="menu-price">
-                                             <span>$28</span>
-                                        </div>
-                                   </div>
-                              </a>
-                         </div>
-                    </div>
-
-                    <div class="col-md-4 col-sm-6">
-                         <!-- MENU THUMB -->
-                         <div class="menu-thumb">
-                              <a href="{{ asset("landing_assets") }}/images/menu-image5.jpg" class="image-popup" title="Project title">
-                                   <img src="{{ asset("landing_assets") }}/images/menu-image5.jpg" class="img-responsive" alt="">
-
-                                   <div class="menu-info">
-                                        <div class="menu-item">
-                                             <h3>Deli Burger</h3>
-                                             <p>Beef / Fried Potatoes</p>
-                                        </div>
-                                        <div class="menu-price">
-                                             <span>$46</span>
-                                        </div>
-                                   </div>
-                              </a>
-                         </div>
-                    </div>
-
-                    <div class="col-md-4 col-sm-6">
-                         <!-- MENU THUMB -->
-                         <div class="menu-thumb">
-                              <a href="{{ asset("landing_assets") }}/images/menu-image6.jpg" class="image-popup" title="Project title">
-                                   <img src="{{ asset("landing_assets") }}/images/menu-image6.jpg" class="img-responsive" alt="">
-
-                                   <div class="menu-info">
-                                        <div class="menu-item">
-                                             <h3>Big Flat Fried</h3>
-                                             <p>Pepper / Crispy</p>
-                                        </div>
-                                        <div class="menu-price">
-                                             <span>$30</span>
-                                        </div>
-                                   </div>
-                              </a>
-                         </div>
-                    </div> --}}
                </div>
           </div>
      </section>
-
-
-     <!-- TESTIMONIAL -->
-     <section id="testimonial" >
-          <div class="overlay"></div>
-          <div class="container">
-               <div class="row">
-
-                    <div class="col-md-12 col-sm-12">
-                         <div class="section-title wow fadeInUp" data-wow-delay="0.1s">
-                              <h2>Testimonials</h2>
-                         </div>
-                    </div>  
-
-                    <div class="col-md-offset-2 col-md-8 col-sm-12">
-                         <div class="owl-carousel owl-theme">
-                              <div class="item">
-                                   <p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Maecenas faucibus mollis interdum ullamcorper nulla non.</p>
-                                        <div class="tst-author">
-                                             <h4>Digital Carlson</h4>
-                                             <span>Pharetra quam sit amet</span>
-                                        </div>
-                              </div>
-
-                              <div class="item">
-                                   <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed vestibulum orci quam.</p>
-                                        <div class="tst-author">
-                                             <h4>Johnny Stephen</h4>
-                                             <span>Magna nisi porta ligula</span>
-                                        </div>
-                              </div>
-
-                              <div class="item">
-                                   <p>Vivamus aliquet felis eu diam ultricies congue. Morbi porta lorem nec consectetur porta quis dui elit habitant morbi.</p>
-                                        <div class="tst-author">
-                                             <h4>Jessie White</h4>
-                                             <span>Vitae lacinia augue urna quis</span>
-                                        </div>
-                              </div>
-
-                         </div>
-                    </div>
-
-               </div>
-          </div>
-     </section>  
-
 
      <!-- CONTACT -->
      <section id="contact" data-stellar-background-ratio="0.5">
@@ -372,17 +237,13 @@ http://www.templatemo.com/tm-515-eatery
 
                          <div class="col-md-12 col-sm-12">
                               <div class="section-title wow fadeInUp" data-wow-delay="0.1s">
-                                   <h2>Contact Us</h2>
+                                   <h2>Kontak Kami</h2>
                               </div>
                          </div>
 
                          <!-- CONTACT FORM -->
                          <form action="/" method="post" class="wow fadeInUp" id="contact-form" role="form" data-wow-delay="0.8s">
                               @csrf
-                              <!-- IF MAIL SENT SUCCESSFUL  // connect this with custom JS -->
-                              <h6 class="text-success">Your message has been sent successfully.</h6>
-                              <!-- IF MAIL NOT SENT -->
-                              <h6 class="text-danger">E-mail must be valid and message must be longer than 1 character.</h6>
                               <div class="col-md-6 col-sm-6">
                                    <input type="text" class="form-control" id="cf-name" name="name" placeholder="Nama Lengkap" required>
                               </div>
@@ -392,7 +253,7 @@ http://www.templatemo.com/tm-515-eatery
                               <div class="col-md-12 col-sm-12">
                                    <input type="text" class="form-control" id="cf-subject" name="subject" placeholder="Subjek" required>
                                    <textarea class="form-control" rows="6" id="cf-message" name="message" placeholder="Pesan yang ingin anda sampaikan" required></textarea>
-                                   <button type="submit" class="form-control" style="background: #ffbd59" id="cf-submit" name="submit">Send Message</button>
+                                   <button type="submit" class="form-control" style="background: #ffbd59" id="cf-submit" name="submit">Kirim Pesan</button>
                               </div>
                          </form>
                     </div>
@@ -469,8 +330,19 @@ http://www.templatemo.com/tm-515-eatery
           </div>
      </footer>
 
+     {{-- ALERT BERHASIL --}}
+     @if (session("pesan"))
+     <div class="notyf" style="justify-content: flex-end; align-items: flex-end;"><div id="notify-custom" class="notyf__toast notyf__toast--lower"><div class="notyf__wrapper"><div class="notyf__icon"><i class="notyf__icon--success" style="color: rgb(59, 125, 221);"></i></div><div class="notyf__message">{{ session("pesan") }}</div></div><div class="notyf__ripple" style="background: rgb(59, 125, 221);"></div></div></div>
+     @endif
 
      <!-- SCRIPTS -->
+     <script>
+     const notify = document.getElementById("notify-custom")
+      setTimeout(() => {
+        notify.classList.add("notyf__toast--disappear")
+      }, 7500)
+     </script>
+
      <script src="{{ asset("landing_assets") }}/js/jquery.js"></script>
      <script src="{{ asset("landing_assets") }}/js/bootstrap.min.js"></script>
      <script src="{{ asset("landing_assets") }}/js/jquery.stellar.min.js"></script>
