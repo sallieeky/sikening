@@ -80,7 +80,7 @@
 					</li>
 					<li class="sidebar-item @yield("keuangan-active")">
 						<a class="sidebar-link" href="/pesanan">
-              <i class="align-middle" data-feather="dollar-sign"></i> <span class="align-middle">Kelola Pesanan</span>
+              <i class="align-middle" data-feather="clipboard"></i> <span class="align-middle">Kelola Pesanan</span>
             </a>
 					</li>
 					<li class="sidebar-item @yield("akun_pengguna-active")">
