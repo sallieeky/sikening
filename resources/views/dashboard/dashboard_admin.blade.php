@@ -8,10 +8,10 @@
   <div class="container-fluid p-0">
     <h1 class="h3 mb-3"><strong>Statistik</strong> Cake Nining</h1>
     <div class="row">
-      <div class="col-xl-6 col-xxl-5 d-flex">
+      <div class="col-xl-12 col-xxl-12 d-flex">
         <div class="w-100">
           <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-3">
               <div class="card">
                 <div class="card-body">
                   <div class="row">
@@ -26,11 +26,12 @@
                   </div>
                   <h4 class="mt-1 mb-3">2.382</h1>
                   <div class="mb-0">
-                    <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -3.65% </span>
-                    <span class="text-muted">Since last week</span>
+                    <span class="text-muted"><small>Data di hitung secara otomatis</small></span>
                   </div>
                 </div>
               </div>
+            </div>
+            <div class="col-md-3">
               <div class="card">
                 <div class="card-body">
                   <div class="row">
@@ -45,13 +46,12 @@
                   </div>
                   <h4 class="mt-1 mb-3">{{ $pengunjung }}</h4>
                   <div class="mb-0">
-                    <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 5.25% </span>
-                    <span class="text-muted">Since last week</span>
+                    <span class="text-muted"><small>Data di hitung secara otomatis</small></span>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-md-3">
               <div class="card">
                 <div class="card-body">
                   <div class="row">
@@ -66,11 +66,12 @@
                   </div>
                   <h4 class="mt-1 mb-3">Rp. {{ number_format(23000,2,",",".") }}</h4>
                   <div class="mb-0">
-                    <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 6.65% </span>
-                    <span class="text-muted">Since last week</span>
+                    <span class="text-muted"><small>Data di hitung secara otomatis</small></span>                  
                   </div>
                 </div>
               </div>
+            </div>
+            <div class="col-md-3">
               <div class="card">
                 <div class="card-body">
                   <div class="row">
@@ -85,23 +86,10 @@
                   </div>
                   <h4 class="mt-1 mb-3">64</h4>
                   <div class="mb-0">
-                    <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -2.25% </span>
-                    <span class="text-muted">Since last week</span>
+                    <span class="text-muted"><small>Data di hitung secara otomatis</small></span>                  
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-6 col-xxl-7">
-        <div class="card flex-fill w-100">
-          <div class="card-header">
-            <h5 class="card-title mb-0">Recent Movement</h5>
-          </div>
-          <div class="card-body py-3">
-            <div class="chart chart-sm">
-              <canvas id="chartjs-dashboard-line"></canvas>
             </div>
           </div>
         </div>
