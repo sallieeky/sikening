@@ -19,7 +19,7 @@
                 @if (count(Auth::user()->invoice) == 0)
                 
                 <div class="alert alert-primary p-3" role="alert">
-                  <p class="mb-0">Keranjang anda masih kosong, silakan untuk memesan pada <a href="/menu">menu sikening</a></p>
+                  <p class="mb-0">Anda masih belum melakukan checkout, silakan untuk checkout <a href="/menu">keranjang</a> anda</p>
                 </div>
                 @endif
                 <ul class="list-group">

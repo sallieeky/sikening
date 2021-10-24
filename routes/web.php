@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
 
 use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
 /*
 |--------------------------------------------------------------------------
@@ -158,9 +159,9 @@ Route::post('/reset-password', function (Request $request) {
 
 
 
-
-
-
+Route::get('/migrate', function () {
+  Artisan::call("migrate:fresh --seed");
+});
 
 
 
