@@ -61,9 +61,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
   // ############## HALAMAN USER AJA YANG BISA AKSES ############# \\
   Route::middleware(['user'])->group(function () {
     Route::get('/menu', [DashboardControllers::class, 'menu']);
-    Route::get('/invoice', [DashboardControllers::class, 'invoice']);
     Route::get('/keranjang', [DashboardControllers::class, 'keranjang']);
     Route::get('/checkout', [DashboardControllers::class, 'checkout']);
+    Route::get('/invoice', [DashboardControllers::class, 'invoice']);
+    Route::get('/invoice/{invoice:kode_pembayaran}', [DashboardControllers::class, 'invoiceDetail']);
 
     Route::post("/tambah-keranjang/{menu}", [DashboardControllers::class, "tambahKeranjang"]);
     Route::get("/hapus-keranjang/{id}", [DashboardControllers::class, "hapusKeranjang"]);

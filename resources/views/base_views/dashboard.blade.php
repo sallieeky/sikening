@@ -121,7 +121,7 @@
                 <img src="{{ asset("storage/users/" . Auth::user()->foto) }}" style="object-fit: cover" class="avatar img-fluid rounded-circle rounded me-1" alt="{{ Auth::user()->nama }}" /> <span class="text-dark">{{ Auth::user()->nama }}</span>
               </a>
 							<div class="dropdown-menu dropdown-menu-end">
-								<a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
+								<a class="dropdown-item" href="/profile"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="/logout"><i class="align-middle me-1" data-feather="log-out"></i> Log out</a>
 							</div>
@@ -140,22 +140,6 @@
 								<a class="text-muted" href="/" target="_blank"><strong>Sikening</strong></a> &copy;
 							</p>
 						</div>
-						{{-- <div class="col-6 text-end">
-							<ul class="list-inline">
-								<li class="list-inline-item">
-									<a class="text-muted" href="https://adminkit.io/" target="_blank">Support</a>
-								</li>
-								<li class="list-inline-item">
-									<a class="text-muted" href="https://adminkit.io/" target="_blank">Help Center</a>
-								</li>
-								<li class="list-inline-item">
-									<a class="text-muted" href="https://adminkit.io/" target="_blank">Privacy</a>
-								</li>
-								<li class="list-inline-item">
-									<a class="text-muted" href="https://adminkit.io/" target="_blank">Terms</a>
-								</li>
-							</ul>
-						</div> --}}
 					</div>
 				</div>
 			</footer>

@@ -202,7 +202,16 @@ class DashboardControllers extends Controller
     }
     public function invoice()
     {
-        return view("dashboard.invoice");
+        return view("dashboard.invoice_list");
+    }
+    public function invoiceDetail(Invoice $invoice)
+    {
+        if ($invoice->user_id == Auth::user()->id) {
+            $keranjang = Keranjang::where("kode_keranjang", $invoice->kode_keranjang)->get();
+            return view("dashboard.invoice", compact("invoice", "keranjang"));
+        } else {
+            return "AW";
+        }
     }
 
     // ================================================ HALAMAN KERANJANG ========================================== \\ 
