@@ -7,7 +7,7 @@
 <main class="content">
   <div class="container-fluid p-0">
     <div class="mb-3">
-      <h1 class="h3 d-inline align-middle">Profil Pengguna</h1>
+      <h1 class="h3 d-inline align-middle"><strong>Profil</strong> Pengguna</h1>
     </div>
     <div class="row">
       <div class="col-md-4 col-xl-3">
@@ -51,11 +51,11 @@
                   <input type="hidden" name="foto_backup" value="{{ Auth::user()->foto }}">
                   <div class="row">
                     <div class="col-md-8">
-                      <div class="mb-3">
+                      <div class="mb-2">
                         <label class="form-label" for="inputUsername">Nama Lengkap</label>
                         <input type="text" name="nama" required class="form-control" id="inputUsername" value="{{ Auth::user()->nama }}" placeholder="Nama Lengkap">
                       </div>
-                      <div class="mb-3">
+                      <div class="mb-2">
                         <label class="form-label" for="inputUsername">Status</label>
                         <textarea rows="2" class="form-control" id="inputBio" required
                           placeholder="Status tentang anda" name="status">{{ Auth::user()->status }}</textarea>
@@ -87,23 +87,27 @@
                   @csrf
                   <div class="row">
                   </div>
-                  <div class="mb-3">
+                  <div class="mb-2">
                     <label class="form-label" for="inputEmail4">Email</label>
                     <input type="email" required disabled class="form-control" id="inputEmail4" value="{{ Auth::user()->email }}" placeholder="Email">
                   </div>
-                  <div class="mb-3">
+                  <div class="mb-2">
+                    <label class="form-label" for="no_telp">Nomor Telepon</label>
+                    <input type="text" name="no_telp" required class="form-control" id="no_telp" value="{{ Auth::user()->no_telp }}" placeholder="Cth : 081234567890">
+                    <small class="text-primary">nomor yang dimasukkan harus terdaftar pada whatsapp</small>
+                  </div>
+                  <div class="mb-2">
                     <label class="form-label" for="inputAddress">Alamat</label>
                     <input name="alamat" type="text" required class="form-control" id="inputAddress" value="{{ Auth::user()->alamat }}" placeholder="Alamat saat ini">
                   </div>
                   <div class="row">
-                    <div class="mb-3 col-md-6">
+                    <div class="mb-2 col-md-6">
                       <label class="form-label" for="inputCity">Kota</label>
                       <input name="kota" type="text" required class="form-control" id="inputCity" value="{{ Auth::user()->kota }}" placeholder="Kota saat ini">
                     </div>
-                    <div class="mb-3 col-md-4">
+                    <div class="mb-2 col-md-4">
                       <label class="form-label" for="inputState">Provinsi</label>
                       <input name="provinsi" type="text" required class="form-control" id="inputState" value="{{ Auth::user()->provinsi }}" placeholder="Provinsi saat ini">
-                      
                     </div>
                     <div class="mb-3 col-md-2">
                       <label class="form-label" for="inputZip">Kode Pos</label>

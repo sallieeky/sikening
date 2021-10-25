@@ -1,5 +1,6 @@
 @extends("base_views.dashboard")
 @section("invoice-active", "active")
+@section("pesanan-active", "active")
 @section("linkcss")
 <link class="js-stylesheet" href="https://demo.adminkit.io/css/light.css" rel="stylesheet">
 @endsection
@@ -7,14 +8,14 @@
 <main class="content">
   <div class="container-fluid p-0">
 
-    <h1 class="h3 mb-3">Invoice</h1>
+    <h1 class="h3 mb-3"><strong>Invoice</strong></h1>
 
-    <div id="content-html" class="row">
+    <div  class="row">
       <div class="col-12">
         <div class="card">
-          <div class="card-body m-sm-3 m-md-5">
+          <div id="content-html" class="card-body m-sm-3 m-md-5">
             <div class="mb-4">
-              Halo <strong>{{ Auth::user()->nama }}</strong>,
+              Halo <strong>{{ $invoice->user->nama }}</strong>,
               <br />
               Ini adalah laporan pemesanan atau pembayaran <strong>Rp. {{ number_format($invoice->total_pembayaran,2,",",".") }}</strong> (Rupiah) yang anda lakukan melalui SIKENING.
             </div>
@@ -27,6 +28,14 @@
               <div class="col-md-6 text-md-end">
                 <div class="text-muted">Tanggal Pembayaran</div>
                 <strong>@if($invoice->metode_pembayaran == "langsung") Silakan membayar langsung di Cake Nining @else {{ $invoice->created_at->format("l, j F Y - h:m a") }} @endif</strong>
+                <div class="text-muted">Status</div>
+                @if ($invoice->status == "belum")
+                  <span class="badge bg-warning">Belum Dikonfirmasi</span>
+                @elseif ($invoice->status == "Terima")
+                  <span class="badge bg-success">Pesanan Anda Telah Dikonfirmasi</span>
+                @elseif ($invoice->status == "Tolak")
+                  <span class="badge bg-danger">Pesanan Anda Ditolak</span>
+                @endif
               </div>
             </div>
 
@@ -36,15 +45,16 @@
               <div class="col-md-6">
                 <div class="text-muted">Pemesan</div>
                 <strong>
-                  {{ Auth::user()->nama }}
+                  {{ $invoice->user->nama }}
                 </strong>
                 <p>
-                  {{ Auth::user()->alamat }} <br>
-                  {{ Auth::user()->kota }} <br>
-                  {{ Auth::user()->provinsi }} <br>
-                  {{ Auth::user()->kode_pos }} <br>
+                  {{ $invoice->user->alamat }} <br>
+                  {{ $invoice->user->kota }} <br>
+                  {{ $invoice->user->provinsi }} <br>
+                  {{ $invoice->user->kode_pos }} <br>
+                  {{ $invoice->user->no_telp }} <br>
                   <a href="#">
-                    {{ Auth::user()->email }}
+                    {{ $invoice->user->email }}
                   </a>
                 </p>
               </div>
@@ -59,6 +69,7 @@
                   Sangatta <br>
                   Kalimantan Timur <br>
                   75312 <br>
+                  082113643151 <br>
                   <a href="#">
                     sikening.a6@gmail.com
                   </a>
@@ -68,10 +79,10 @@
                   Cake Nining
                 </strong>
                 <p>
-                  WA : 081243942304 <br>
                   Sallie Trixie Zebada Mansurina <br>
                   BNI <br>
                   0722323432 <br>
+                  WA : 081243942304 <br>
                   <a href="#">
                     sikening.a6@gmail.com
                   </a>
@@ -125,40 +136,76 @@
                 {{-- Please send all items at the same time to the shipping address.
                 Thanks in advance. --}}
               </p>
-              <button type="button" id="cmd" class="btn btn-primary" disabled>
-                Print this receipt
-              </button>
             </div>
           </div>
+          <button type="button" id="cmd" class="btn btn-primary">
+            Download Invoice sebagai Pdf
+          </button>
         </div>
       </div>
     </div>
   </div>
 </main>
 
+@if (session("pesan"))
+  <div class="notyf" style="justify-content: flex-end; align-items: flex-end;"><div id="notify-custom" class="notyf__toast notyf__toast--lower"><div class="notyf__wrapper"><div class="notyf__icon"><i class="notyf__icon--success" style="color: rgb(59, 125, 221);"></i></div><div class="notyf__message">{{ session("pesan") }}</div></div><div class="notyf__ripple" style="background: rgb(59, 125, 221);"></div></div></div>
+@endif
+
 <div id="editor-content"></div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
 
-{{-- <script>
-  var doc = new jsPDF();
+<script>
+  const notify = document.getElementById("notify-custom")
+      setTimeout(() => {
+        notify.classList.add("notyf__toast--disappear")
+      }, 7500)
+</script>
+
+<script>
+
+
+
+
+
+//   var doc = new jsPDF();
+//   var specialElementHandlers = {
+//     '#editor-content': function (element, renderer) {
+//         return true;
+//     }
+// };
+
   var contenttoprint = document.getElementById("content-html");
-  var specialElementHandlers = {
-    '#editor-content': function (element, renderer) {
-        return true;
-    }
-};
-
 
   $('#cmd').click(function () {
-    html2canvas(contenttoprint, {width: 500}).then((canvas) => {
-      doc.addImage(canvas.toDataURL("image/png"), "PNG", 5, 5, 500, 500)
-    })
-    doc.fromHTML($('#content-html').html(), 15, 15, {
-        'width': 170,
-            'elementHandlers': specialElementHandlers
-    });
-    doc.save('sample-file.pdf');
+
+    html2canvas(contenttoprint, {height: document.body.clientHeight, width: document.body.clientWidth})
+      .then(function (canvas) {
+        var wdt;
+        var hgt;
+
+        var img = canvas.toDataURL("image/png", wdt = canvas.width, hgt = canvas.height);
+        var rasio = hgt/wdt;
+
+        var doc = new jsPDF("p", "pt", "a4");
+        var width = doc.internal.pageSize.width;
+        var height = width * rasio;
+        doc.addImage(img, "JPEG", 100, 100, width, height);
+        doc.save("Invoice #{{ $invoice->kode_pembayaran }}.pdf");
+        
+      })
+
+
+
+    // html2canvas(contenttoprint, {width: 500}).then((canvas) => {
+    //   doc.addImage(canvas.toDataURL("image/png"), "PNG", 5, 5, 500, 500)
+    // })
+    // doc.fromHTML($('#content-html').html(), 15, 15, {
+    //     'width': 170,
+    //         'elementHandlers': specialElementHandlers
+    // });
+    // doc.save('sample-file.pdf');
 });
-</script> --}}
+</script>
 @endsection

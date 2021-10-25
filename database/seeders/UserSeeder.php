@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
             "role" => "admin",
             "foto" => "logo.png",
             "email" => "sikening.a6@gmail.com",
+            "no_telp" => "082113643151",
             "password" => bcrypt("admin123"),
             "email_verified_at" => date("Y-m-d h:i:s"),
             "remember_token" => Str::random(60),
@@ -33,6 +34,7 @@ class UserSeeder extends Seeder
         User::create([
             "nama" => "User Sikening",
             "email" => "user@gmail.com",
+            "no_telp" => "081243942304",
             "password" => bcrypt("user12345"),
             "email_verified_at" => date("Y-m-d h:i:s"),
             "remember_token" => Str::random(60),

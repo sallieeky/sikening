@@ -27,6 +27,10 @@
                 <label for="form14">Email</label>
                 <input type="text" id="form14" disabled value="{{ Auth::user()->email }}" class="form-control">
               </div>
+              <div class="md-form mb-2 md-outline mt-0">
+                <label for="form1231">Nomor Telepon</label>
+                <input type="text" id="form1231" disabled value="{{ Auth::user()->no_telp }}" class="form-control">
+              </div>
               <div class="md-form mb-2 md-outline">
                 <label for="form15">Alamat</label>
                 <input type="text" id="form15" disabled value="{{ Auth::user()->alamat }}" class="form-control">
@@ -51,10 +55,14 @@
                   </div>
                 </div>
               </div>
+              @if (Auth::user()->alamat && Auth::user()->kota && Auth::user()->provinsi && Auth::user()->kode_pos && Auth::user()->no_telp)
               <div class="form-check pl-0 mb-4 mb-lg-0">
                 <label class="form-check-label small text-uppercase card-link-secondary" for="new3">Saya yakin informasi di atas telah sesuai</label>
                 <input required name="konfirmasi" type="checkbox" class="form-check-input filled-in" id="new3">
               </div>
+							@else
+								<small class="text-danger m-0">Lengkapi data diri anda pada halaman <a href="/profile">profile</a></small>
+							@endif
             </div>
           </div>
         </div>
@@ -79,12 +87,11 @@
                           <span><strong>Rp. @if($metode_pembayaran == "bni") {{ number_format($total+8000,2,",",".")  }} @else {{ number_format($total,2,",",".")  }} @endif</strong></span>
                       </li>
                   </ul>
-                  <button type="submit" class="btn btn-primary btn-block waves-effect waves-light">Lakukan pemesanan</b>
+                  <button type="submit" @if (Auth::user()->alamat && Auth::user()->kota && Auth::user()->provinsi && Auth::user()->kode_pos && Auth::user()->no_telp) @else disabled @endif class="btn btn-primary btn-block waves-effect waves-light">Lakukan pemesanan</b>
               </div>
           </div>
         </div>   
       </div>
-
       <div class="row">
         <div class="col-md-8">
           <div class="card">

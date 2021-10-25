@@ -21,7 +21,7 @@
 <main class="content">
   {{-- PROFILE --}}
   <div class="container-fluid p-0">
-    <h1 class="h3 mb-3"><strong>Kelola Profile SIKENING</strong></h1>
+    <h1 class="h3 mb-3"><strong>Kelola</strong> Profile SIKENING</h1>
     <div class="row">
       <div class="col-12">
         <div class="card">
@@ -57,7 +57,7 @@
   
   {{-- PROMO --}}
   <div class="container-fluid p-0">
-    <h1 class="h3 mb-3"><strong>Kelola Promo SIKENING</strong></h1>
+    <h1 class="h3 mb-3"><strong>Kelola</strong> Promo SIKENING</h1>
     <div class="row">
       <div class="col-12">
         <div class="card">
@@ -121,7 +121,7 @@
 
   {{-- MENU --}}
   <div class="container-fluid p-0">
-    <h1 class="h3 mb-3"><strong>Kelola Menu SIKENING</strong></h1>
+    <h1 class="h3 mb-3"><strong>Kelola</strong> Menu SIKENING</h1>
     <div class="row">
       <div class="col-12">
         <div class="card">

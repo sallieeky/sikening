@@ -27,7 +27,7 @@
                   <li class="list-group-item d-flex justify-content-between align-items-center">
                     <div class="ms-2 me-auto">
                       <div class="fw-bold">Kode Pembayaran #{{ $ivc->kode_pembayaran }}</div>
-                      Tanggal Checkout : {{ $ivc->created_at->format("l, j F Y - h:m a") }}
+                      Tanggal Checkout : {{ $ivc->created_at->format("l, j F Y - g:i a") }}
                     </div>
                     <a href="/invoice/{{ $ivc->kode_pembayaran }}"><span class="badge bg-primary p-2">Lihat Detail</span></a>
                   </li>

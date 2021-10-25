@@ -40,11 +40,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
   Route::post("/profile-public-info", [DashboardControllers::class, "profilePublicInfo"]);
   Route::post("/profile-private-info", [DashboardControllers::class, "profilePrivateInfo"]);
 
+  Route::get('/invoice/{invoice:kode_pembayaran}', [DashboardControllers::class, 'invoiceDetail']);
 
   // ############## HALAMAN ADMIN AJA YANG BISA AKSES ############# \\
   Route::middleware(['admin'])->group(function () {
     Route::get('/kelola', [DashboardControllers::class, 'kelola']);
     Route::get('/keuangan', [DashboardControllers::class, 'keuangan']);
+    Route::get('/pesanan', [DashboardControllers::class, 'pesanan']);
     Route::get('/akun-pengguna', [DashboardControllers::class, 'akunPengguna']);
 
     Route::post("/kelola-profile", [DashboardControllers::class, "kelolaProfile"]);
@@ -56,6 +58,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get("/menu-hapus/{id}", [DashboardControllers::class, "menuHapus"]);
     Route::post("/menu-tambah", [DashboardControllers::class, "menuTambah"]);
     Route::post("/menu-edit", [DashboardControllers::class, "menuEdit"]);
+
+    Route::post("/pesanan-konfirmasi/{invoice}", [DashboardControllers::class, "pesananKonfirmasi"]);
   });
 
 
@@ -65,7 +69,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/keranjang', [DashboardControllers::class, 'keranjang']);
     Route::get('/checkout', [DashboardControllers::class, 'checkout']);
     Route::get('/invoice', [DashboardControllers::class, 'invoice']);
-    Route::get('/invoice/{invoice:kode_pembayaran}', [DashboardControllers::class, 'invoiceDetail']);
 
     Route::post("/tambah-keranjang/{menu}", [DashboardControllers::class, "tambahKeranjang"]);
     Route::get("/hapus-keranjang/{id}", [DashboardControllers::class, "hapusKeranjang"]);

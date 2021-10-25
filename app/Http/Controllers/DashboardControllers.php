@@ -65,6 +65,7 @@ class DashboardControllers extends Controller
         $request->validate([
             "alamat" => "required",
             "kota" => "required",
+            "no_telp" => "required",
             "provinsi" => "required",
             "kode_pos" => "required|numeric|digits:5",
         ]);
@@ -72,6 +73,7 @@ class DashboardControllers extends Controller
             ->update([
                 "alamat" => $request->alamat,
                 "kota" => $request->kota,
+                "no_telp" => $request->no_telp,
                 "provinsi" => $request->provinsi,
                 "kode_pos" => $request->kode_pos,
             ]);
@@ -186,9 +188,22 @@ class DashboardControllers extends Controller
     {
         return view("dashboard.keuangan");
     }
+    public function pesanan()
+    {
+        $invoice = Invoice::where("status", "belum")->get();
+        return view("dashboard.pesanan", compact('invoice'));
+    }
+    public function pesananKonfirmasi(Invoice $invoice, Request $request)
+    {
+        $invoice->update([
+            "status" => $request->status
+        ]);
+        return back()->with("pesan", "Berhasil melakukan konfirmasi invoice");
+    }
     public function akunPengguna()
     {
-        return view("dashboard.akun_pengguna");
+        $user = User::where("role", "user")->get();
+        return view("dashboard.akun_pengguna", compact('user'));
     }
 
     // =========================================== END ADMIN =========================================== \\
@@ -206,7 +221,7 @@ class DashboardControllers extends Controller
     }
     public function invoiceDetail(Invoice $invoice)
     {
-        if ($invoice->user_id == Auth::user()->id) {
+        if ($invoice->user_id == Auth::user()->id || Auth::user()->role == "admin") {
             $keranjang = Keranjang::where("kode_keranjang", $invoice->kode_keranjang)->get();
             return view("dashboard.invoice", compact("invoice", "keranjang"));
         } else {
@@ -334,7 +349,7 @@ class DashboardControllers extends Controller
             "keterangan_aktifitas" => "Melakukan checkout keranjang dengan kode pembayaran #$kode_pembayaran",
         ]);
 
-        return redirect("/invoice");
+        return redirect("/invoice/$kode_pembayaran")->with("pesan", "Berhasil melakukan pemesanan");
     }
 
     // =========================================== END USER =========================================== \\

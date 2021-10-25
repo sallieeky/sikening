@@ -77,7 +77,7 @@ http://www.templatemo.com/tm-515-eatery
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                         <li><a href="https://wa.me/+6281241944616?text=Saya ingin bertanya" target="_blank">WhatsApp <i class="fa fa-phone"></i> 0812-4194-4616</a></li>
+                         <li><a href="https://wa.me/+6281241944616?text=Saya ingin bertanya" target="_blank">WhatsApp <i class="fa fa-phone"></i> +62 821-1364-3151</a></li>
                          <a href="/dashboard" class="section-btn">Dashboard</a>
                     </ul>
                </div>
@@ -229,7 +229,7 @@ http://www.templatemo.com/tm-515-eatery
 	-->
                     <div class="wow fadeInUp col-md-6 col-sm-12" data-wow-delay="0.4s">
                          <div id="google-map">
-                              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.8085782997714!2d117.48241831457183!3d0.12661529990763434!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x320a0d8e825b4039%3A0x1fec45a70bf09813!2sBontang%2C%20Tanjung%20Laut%2C%20South%20Bontang%2C%20Bontang%20City%2C%20East%20Kalimantan%2075325!5e0!3m2!1sen!2sid!4v1632980477183!5m2!1sen!2sid" allowfullscreen></iframe>
+                              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.6463921372524!2d117.52471421457196!3d0.5319075996119428!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x320a354a8f1242f7%3A0xad461bc280cc167c!2sJl.%20Yos%20Sudarso%20IV%2C%20Tlk.%20Lingga%2C%20Sangatta%20Utara%2C%20Kabupaten%20Kutai%20Timur%2C%20Kalimantan%20Timur!5e0!3m2!1sen!2sid!4v1635131617268!5m2!1sen!2sid" allowfullscreen></iframe>
                          </div>
                     </div>    
 
@@ -271,10 +271,10 @@ http://www.templatemo.com/tm-515-eatery
                     <div class="col-md-3 col-sm-8">
                          <div class="footer-info">
                               <div class="section-title">
-                                   <h2 class="wow fadeInUp" data-wow-delay="0.2s">Find us</h2>
+                                   <h2 class="wow fadeInUp" data-wow-delay="0.2s">Cari Kami</h2>
                               </div>
                               <address class="wow fadeInUp" data-wow-delay="0.4s">
-                                   <p>123 nulla a cursus rhoncus,<br> augue sem viverra 10870<br>id ultricies sapien</p>
+                                   <p>Jln yos sudarso 3.<br> Kel. Teluk lingga. Kec sangatta utara.<br> Kab kutai timur</p>
                               </address>
                          </div>
                     </div>
@@ -282,12 +282,12 @@ http://www.templatemo.com/tm-515-eatery
                     <div class="col-md-3 col-sm-8">
                          <div class="footer-info">
                               <div class="section-title">
-                                   <h2 class="wow fadeInUp" data-wow-delay="0.2s">Reservation</h2>
+                                   <h2 class="wow fadeInUp" data-wow-delay="0.2s">Pemesanan</h2>
                               </div>
                               <address class="wow fadeInUp" data-wow-delay="0.4s">
-                                   <p>090-080-0650 | 090-070-0430</p>
-                                   <p><a href="mailto:info@company.com">info@company.com</a></p>
-                                   <p>LINE: eatery247 </p>
+                                   <p>+62 821-1364-3151</p>
+                                   <p><a href="mailto:sikening.a6@gmail.com">sikening.a6@gmail.com</a></p>
+                                   {{-- <p>LINE: eatery247 </p> --}}
                               </address>
                          </div>
                     </div>
@@ -295,17 +295,17 @@ http://www.templatemo.com/tm-515-eatery
                     <div class="col-md-4 col-sm-8">
                          <div class="footer-info footer-open-hour">
                               <div class="section-title">
-                                   <h2 class="wow fadeInUp" data-wow-delay="0.2s">Open Hours</h2>
+                                   <h2 class="wow fadeInUp" data-wow-delay="0.2s">Jam buka</h2>
                               </div>
                               <div class="wow fadeInUp" data-wow-delay="0.4s">
-                                   <p>Monday: Closed</p>
+                                   <p>Buka Setiap Hari</p>
                                    <div>
-                                        <strong>Tuesday to Friday</strong>
-                                        <p>7:00 AM - 9:00 PM</p>
+                                        <strong>Senin sampai Minggu</strong>
+                                        <p>7:00 - 22:00</p>
                                    </div>
                                    <div>
-                                        <strong>Saturday - Sunday</strong>
-                                        <p>11:00 AM - 10:00 PM</p>
+                                        <strong>Jum'at</strong>
+                                        <p>7:00 - 11:00 dan 14:00 - 22:00</p>
                                    </div>
                               </div>
                          </div>
@@ -320,7 +320,7 @@ http://www.templatemo.com/tm-515-eatery
                          </ul>
 
                          <div class="wow fadeInUp copyright-text" data-wow-delay="0.8s"> 
-                              <p><br>Copyright &copy; 2018 <br>Your Company Name 
+                              <p><br>Copyright &copy; 2021 <br>Cake Nining 
                               
                               <br><br>Design: TemplateMo</p>
                          </div>

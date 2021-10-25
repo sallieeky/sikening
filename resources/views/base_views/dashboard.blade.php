@@ -1,3 +1,4 @@
+<?php use App\Models\Invoice; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,7 +45,7 @@
 					<li class="sidebar-item @yield("profile-active")">
 						<a class="sidebar-link" href="/profile">
               <i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
-							@if (Auth::user()->alamat && Auth::user()->kota && Auth::user()->provinsi && Auth::user()->kode_pos)
+							@if (Auth::user()->alamat && Auth::user()->kota && Auth::user()->provinsi && Auth::user()->kode_pos && Auth::user()->no_telp)
 							@else
 								<span class="sidebar-badge badge bg-warning">Lengkapi Data</span>
 							@endif
@@ -78,9 +79,10 @@
               <i class="align-middle" data-feather="dollar-sign"></i> <span class="align-middle">Kelola Keuangan</span>
             </a>
 					</li>
-					<li class="sidebar-item @yield("keuangan-active")">
+					<li class="sidebar-item @yield("pesanan-active")">
 						<a class="sidebar-link" href="/pesanan">
               <i class="align-middle" data-feather="clipboard"></i> <span class="align-middle">Kelola Pesanan</span>
+							<span class="sidebar-badge badge bg-primary">{{ count(Invoice::where("status", "belum")->get()) }}</span>
             </a>
 					</li>
 					<li class="sidebar-item @yield("akun_pengguna-active")">

@@ -69,7 +69,7 @@
               <div class="flex-grow-1">
                 <small class="float-end text-navy">{{ $akt->created_at->diffForHumans() }}</small>
                 <strong>{{ Auth::user()->nama }}</strong> {{ $akt->keterangan_aktifitas }} <br />
-                <small class="text-muted">{{ $akt->created_at->format("l, j F Y H:m") }}</small><br />
+                <small class="text-muted">{{ $akt->created_at->format("l, j F Y g:i a") }}</small><br />
                 
                 @if ($akt->lampiran_1)
                 <div class="row g-0 mt-1">
