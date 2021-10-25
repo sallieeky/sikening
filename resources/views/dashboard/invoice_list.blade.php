@@ -17,7 +17,6 @@
             <div class="row">
               <div class="col-md-12">
                 @if (count(Auth::user()->invoice) == 0)
-                
                 <div class="alert alert-primary p-3" role="alert">
                   <p class="mb-0">Anda masih belum melakukan checkout, silakan untuk checkout <a href="/menu">keranjang</a> anda</p>
                 </div>
@@ -26,7 +25,15 @@
                   @foreach (Auth::user()->invoice as $ivc)
                   <li class="list-group-item d-flex justify-content-between align-items-center">
                     <div class="ms-2 me-auto">
-                      <div class="fw-bold">Kode Pembayaran #{{ $ivc->kode_pembayaran }}</div>
+                      <div class="fw-bold">Kode Pembayaran #{{ $ivc->kode_pembayaran }}
+                        @if ($ivc->status == "belum")
+                          <span class="badge bg-warning">Belum Dikonfirmasi</span>
+                        @elseif ($ivc->status == "Terima")
+                          <span class="badge bg-success">Pesanan Anda Telah Dikonfirmasi</span>
+                        @elseif ($ivc->status == "Tolak")
+                          <span class="badge bg-danger">Pesanan Anda Ditolak</span>
+                        @endif
+                      </div>
                       Tanggal Checkout : {{ $ivc->created_at->format("l, j F Y - g:i a") }}
                     </div>
                     <a href="/invoice/{{ $ivc->kode_pembayaran }}"><span class="badge bg-primary p-2">Lihat Detail</span></a>

@@ -19,21 +19,23 @@ class MenuSeeder extends Seeder
             "nama" => "Bolu Gulung",
             "harga" => "3000",
             "kategori" => "Kue Basah",
-            "stok" => "12"
+            "stok" => "0"
         ]);
         Menu::create([
             "gambar" => "gabin_fla.jpg",
             "nama" => "Gabin Fla",
             "harga" => "2500",
             "kategori" => "Kue Kering",
-            "stok" => "21"
+            "stok" => "21",
+            "count" => "3",
         ]);
         Menu::create([
             "gambar" => "kue_nampan.jpg",
             "nama" => "Paket Kue Nampan",
             "harga" => "25000",
             "kategori" => "Paket Nampan",
-            "stok" => "3"
+            "stok" => "3",
+            "count" => "4"
         ]);
         Menu::create([
             "gambar" => "lapis_surabaya.jpg",
@@ -41,7 +43,6 @@ class MenuSeeder extends Seeder
             "harga" => "5000",
             "kategori" => "Kue Basah",
             "stok" => "10",
-            "count" => "19"
         ]);
         Menu::create([
             "gambar" => "martabak_mini.jpeg",
@@ -49,7 +50,6 @@ class MenuSeeder extends Seeder
             "harga" => "3000",
             "kategori" => "Gorengan",
             "stok" => "18",
-            "count" => "12"
         ]);
         Menu::create([
             "gambar" => "pie_buah.png",
@@ -64,7 +64,6 @@ class MenuSeeder extends Seeder
             "harga" => "2000",
             "kategori" => "Gorengan",
             "stok" => "24",
-            "count" => "20"
         ]);
         Menu::create([
             "gambar" => "roti_goreng.jpg",
@@ -79,7 +78,6 @@ class MenuSeeder extends Seeder
             "harga" => "6000",
             "kategori" => "Gorengan",
             "stok" => "30",
-            "count" => "12"
         ]);
         Menu::create([
             "gambar" => "sus_vla_vanila.jpg",

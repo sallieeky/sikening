@@ -60,6 +60,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post("/menu-edit", [DashboardControllers::class, "menuEdit"]);
 
     Route::post("/pesanan-konfirmasi/{invoice}", [DashboardControllers::class, "pesananKonfirmasi"]);
+    Route::post("/pesanan-admin", [DashboardControllers::class, "pesananAdmin"]);
   });
 
 

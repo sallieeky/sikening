@@ -26,7 +26,7 @@
                 @foreach ($menu_terlaris as $mt)
                 <div class="col-12 col-sm-8 col-md-6 col-lg-4">
                   <div class="card">
-                    <img class="card-img" style="height: 200px; object-fit: cover" src="{{ asset("storage/menu/" . $mt->gambar) }}" alt="{{ $mt->nama }}">
+                    <img class="card-img" style="height: 200px; object-fit: cover; @if($mt->stok == 0) opacity: 0.3 @endif" src="{{ asset("storage/menu/" . $mt->gambar) }}" alt="{{ $mt->nama }}">
                     <div class="card-body">
                       <h4 class="card-title">{{ $mt->nama }}</h4>
                       <h6 class="card-subtitle mb-2 text-muted">Kategori : {{ $mt->kategori }}</h6>
@@ -34,11 +34,11 @@
                       <form action="/tambah-keranjang/{{ $mt->id }}" method="POST">
                         @csrf
                         <div class="options d-flex flex-fill my-1">
-                          <input type="number" class="form-control" name="jumlah" id="jumlah" min="1" max="{{ $mt->stok }}" placeholder="Jumlah">
+                          <input @if($mt->stok == 0) disabled @endif type="number" class="form-control" name="jumlah" id="jumlah" min="1" max="{{ $mt->stok }}" placeholder="Jumlah">
                       </div>
                       <div class="buy d-flex justify-content-between align-items-center">
                         <div class="price text-success"><h5 class="mt-4">Rp. {{ number_format($mt->harga,2,",",".") }}</h5></div>
-                         <button type="submit" class="btn btn-danger mt-3"><i class="align-middle" data-feather="shopping-cart"></i> Masukkan keranjang</button>
+                         <button @if($mt->stok == 0) disabled @endif type="submit" class="btn btn-danger mt-3"><i class="align-middle" data-feather="shopping-cart"></i> Masukkan keranjang</button>
                       </div>
                     </form>
                     </div>

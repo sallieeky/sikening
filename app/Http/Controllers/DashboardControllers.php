@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AdminPesan;
 use App\Models\Aktifitas;
 use App\Models\Invoice;
 use App\Models\Keranjang;
@@ -22,8 +23,17 @@ class DashboardControllers extends Controller
     {
         if (Auth::user()->role == "admin") {
             $pengunjung = Statistik::where("nama", "kunjungan")->pluck("value")->first();
+            $pendapatan = Statistik::where("nama", "pendapatan")->pluck("value")->first();
+            $pesanan = Invoice::all()->count();
+            $menu = Menu::all()->pluck("count");
+
+            $penjualan = 0;
+            foreach ($menu as $mn) {
+                $penjualan += $mn;
+            }
+
             $menu_terlaris = Menu::orderBy("count", "DESC")->get()->take(5);
-            return view("dashboard.dashboard_admin", compact("pengunjung", "menu_terlaris"));
+            return view("dashboard.dashboard_admin", compact("pengunjung", "menu_terlaris", "pendapatan", "pesanan", "penjualan"));
         } else {
             $menu_terlaris = Menu::orderBy("count", "DESC")->get()->take(3);
             return view("dashboard.dashboard_user", compact("menu_terlaris"));
@@ -191,14 +201,34 @@ class DashboardControllers extends Controller
     public function pesanan()
     {
         $invoice = Invoice::where("status", "belum")->get();
-        return view("dashboard.pesanan", compact('invoice'));
+        $menu = Menu::all();
+        return view("dashboard.pesanan", compact('invoice', "menu"));
     }
     public function pesananKonfirmasi(Invoice $invoice, Request $request)
     {
+        if ($request->status == "Terima") {
+            Statistik::where("nama", "pendapatan")->first()->increment('value', $invoice->total_pembayaran);
+        }
+
         $invoice->update([
             "status" => $request->status
         ]);
         return back()->with("pesan", "Berhasil melakukan konfirmasi invoice");
+    }
+    public function pesananAdmin(Request $request)
+    {
+        $jml_menu = Menu::all()->count();
+        for ($i = 0; $i < $jml_menu; $i++) {
+            $menu = Menu::where("id", $request->{'menu_' . $i})->first();
+            if ($request->{'menu_' . $i}) {
+                AdminPesan::create([
+                    "menu_id" => $request->{'menu_' . $i},
+                    "jumlah" => $request->{'jumlah_' . $i},
+                    "total" => $menu->harga * $request->{'jumlah_' . $i}
+                ]);
+            }
+        }
+        return back()->with("pesan", "Berhasil melakukan pembelian");
     }
     public function akunPengguna()
     {
@@ -266,6 +296,10 @@ class DashboardControllers extends Controller
                     ->update([
                         "jumlah" => $request->jumlah
                     ]);
+                $menu->decrement("count", $cek_menu->jumlah);
+                $menu->increment("count", $request->jumlah);
+                $menu->increment("stok", $cek_menu->jumlah);
+                $menu->decrement("stok", $request->jumlah);
                 return back()->with("pesan", "Berhasil menambahkan ke keranjang");
             }
         } else {
@@ -278,6 +312,9 @@ class DashboardControllers extends Controller
             "jumlah" => $request->jumlah
         ]);
 
+        $menu->increment("count", $request->jumlah);
+        $menu->decrement("stok", $request->jumlah);
+
         Aktifitas::create([
             "user_id" => Auth::user()->id,
             "keterangan_aktifitas" => "Menambahkan $menu->nama kedalam keranjang",
@@ -288,6 +325,8 @@ class DashboardControllers extends Controller
     public function hapusKeranjang(Keranjang $id)
     {
         $id->delete();
+        $id->menu->increment('stok', $id->jumlah);
+        $id->menu->decrement('count', $id->jumlah);
         Aktifitas::create([
             "user_id" => Auth::user()->id,
             "keterangan_aktifitas" => "Menghapus " . $id->menu->nama . " dari keranjang",

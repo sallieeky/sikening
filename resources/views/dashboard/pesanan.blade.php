@@ -44,7 +44,8 @@
                     @if($iv->bukti_pembayaran == "bayar ditempat")
                       {{ $iv->bukti_pembayaran}}
                     @else
-                      <img src="{{ asset("storage/bukti_pembayaran/" . $iv->bukti_pembayaran) }}" alt="{{ $iv->kode_pembayaran }}" style="height: 100px">
+                      <a target="_blank" href="{{ asset("storage/bukti_pembayaran/" . $iv->bukti_pembayaran) }}">Lihat bukti pembayaran</a>
+                      {{-- <img src="{{ asset("storage/bukti_pembayaran/" . $iv->bukti_pembayaran) }}" alt="{{ $iv->kode_pembayaran }}" style="height: 100px"> --}}
                     @endif
                   </td>
                   <td>
@@ -67,11 +68,30 @@
     <div class="row">
       <div class="col-md-12">
         <div class="card">
-          <div class="card-header">
-            <h5 class="card-title mb-0">Pesan secara offline</h5>
+          <div class="card-header d-flex align-items-center" style="justify-content: space-between">
+            <h5 class="card-title mb-0 pull-left">Pembelian langsung di Cake Nining</h5>
           </div>
           <div class="card-body">
-            <h2>hallo world</h2>
+            <form action="/pesanan-admin" method="POST">
+            @csrf
+            <div class="row">
+              @foreach ($menu as $mn)
+              <div class="col-md-3 mb-3 ">
+                <div class="form-check">
+                  <input name="menu_{{ $mn->id }}" class="form-check-input" type="checkbox" value="{{ $mn->id }}" id="menu-{{ $mn->id }}">
+                  <label class="form-check-label" for="menu-{{ $mn->id }}">
+                    {{ $mn->nama }}
+                  </label><br>
+                  <div class="d-flex align-items-center" style="justify-content: space-around">
+                    <label for="jumlah-{{ $mn->id }}" class="form-label">Jumlah</label>
+                    <input name="jumlah_{{ $mn->id }}" min="0" max="{{ $mn->stok }}" value="0" type="number" class="form-control" style="width: 25%" id="jumlah-{{ $mn->id }}" aria-describedby="emailHelp">
+                  </div>
+                </div>
+              </div>
+              @endforeach
+              <button type="submit" class="btn btn-primary">Submit Pembelian</button>
+            </div>
+          </form>
           </div>
         </div>
       </div>
@@ -120,6 +140,7 @@
       setTimeout(() => {
         notify.classList.add("notyf__toast--disappear")
       }, 7500)
+
 </script>
 
 @endsection

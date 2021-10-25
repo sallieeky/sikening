@@ -25,5 +25,17 @@ class DatabaseSeeder extends Seeder
             "nama" => "kunjungan",
             "value" => 0
         ]);
+        Statistik::create([
+            "nama" => "penjualan",
+            "value" => 0
+        ]);
+        Statistik::create([
+            "nama" => "pendapatan",
+            "value" => 0
+        ]);
+        Statistik::create([
+            "nama" => "pesanan",
+            "value" => 0
+        ]);
     }
 }
