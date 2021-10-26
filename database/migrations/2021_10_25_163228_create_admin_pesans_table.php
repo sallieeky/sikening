@@ -15,6 +15,7 @@ class CreateAdminPesansTable extends Migration
     {
         Schema::create('admin_pesans', function (Blueprint $table) {
             $table->id();
+            $table->string("kode_pesan");
             $table->integer("menu_id");
             $table->integer("jumlah");
             $table->integer("total");

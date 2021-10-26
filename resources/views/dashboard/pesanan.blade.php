@@ -49,7 +49,7 @@
                     @endif
                   </td>
                   <td>
-                    <span class="badge bg-danger">Belum Dikonfirmasi</span>
+                    <span class="badge bg-warning">Belum Dikonfirmasi</span>
                   </td>
                   <td>
                     <a target="_blank" href="/invoice/{{ $iv->kode_pembayaran }}" class="btn btn-outline-primary">Detail</a>
@@ -74,17 +74,17 @@
           <div class="card-body">
             <form action="/pesanan-admin" method="POST">
             @csrf
-            <div class="row">
+            <div class="row" id="formform">
               @foreach ($menu as $mn)
-              <div class="col-md-3 mb-3 ">
+              <div class="col-md-3 mb-3">
                 <div class="form-check">
-                  <input name="menu_{{ $mn->id }}" class="form-check-input" type="checkbox" value="{{ $mn->id }}" id="menu-{{ $mn->id }}">
+                  <input @if($mn->stok == 0) disabled @endif name="menu_{{ $mn->id }}" class="form-check-input cb" type="checkbox" value="{{ $mn->id }}" id="menu-{{ $mn->id }}">
                   <label class="form-check-label" for="menu-{{ $mn->id }}">
                     {{ $mn->nama }}
                   </label><br>
                   <div class="d-flex align-items-center" style="justify-content: space-around">
-                    <label for="jumlah-{{ $mn->id }}" class="form-label">Jumlah</label>
-                    <input name="jumlah_{{ $mn->id }}" min="0" max="{{ $mn->stok }}" value="0" type="number" class="form-control" style="width: 25%" id="jumlah-{{ $mn->id }}" aria-describedby="emailHelp">
+                    <label for="jumlah-{{ $mn->id }}" class="form-label">Jumlah (stok: {{ $mn->stok }})</label>
+                    <input name="jumlah_{{ $mn->id }}" disabled min="1" max="{{ $mn->stok }}"  type="number" class="form-control num" style="width: 25%" id="jumlah-{{ $mn->id }}" aria-describedby="emailHelp">
                   </div>
                 </div>
               </div>
@@ -140,6 +140,23 @@
       setTimeout(() => {
         notify.classList.add("notyf__toast--disappear")
       }, 7500)
+      
+  const formform = document.getElementById("formform")
+  const cb = document.querySelectorAll('.cb')
+  const num = formform.querySelectorAll('.num')
+
+  for(let i=0; i<{{ count($menu) }}; i++) {
+    function validator() {
+    if (cb[i].checked == false) {
+      num[i].disabled = true;
+      num[i].value = null;
+    } else {
+      num[i].disabled = false;
+      num[i].value = 1;
+    }
+  }
+    cb[i].addEventListener('click', validator);
+}
 
 </script>
 

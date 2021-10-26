@@ -196,7 +196,25 @@ class DashboardControllers extends Controller
 
     public function keuangan()
     {
-        return view("dashboard.keuangan");
+        $invoice = Invoice::all();
+        $adminPesan = AdminPesan::all();
+
+        $pInvoice = 0;
+        $pAdmin = 0;
+
+        $adminKode = [];
+        foreach ($invoice->where("status", "Terima") as $iv) {
+            $pInvoice += $iv->total_pembayaran;
+        }
+        foreach ($adminPesan as $ap) {
+            $pAdmin += $ap->total;
+            $adminKode[] = $ap->kode_pesan;
+        }
+        $adminKode = array_values(array_unique($adminKode));
+
+        $total = $pInvoice + $pAdmin;
+
+        return view("dashboard.keuangan", compact("invoice", "adminPesan", "pInvoice", "pAdmin", "total", "adminKode"));
     }
     public function pesanan()
     {
@@ -208,6 +226,12 @@ class DashboardControllers extends Controller
     {
         if ($request->status == "Terima") {
             Statistik::where("nama", "pendapatan")->first()->increment('value', $invoice->total_pembayaran);
+        } else {
+            $keranjang = Keranjang::where("kode_keranjang", $invoice->kode_keranjang)->get();
+            foreach ($keranjang as $kr) {
+                $kr->menu->decrement("count", $kr->jumlah);
+                $kr->menu->increment("stok", $kr->jumlah);
+            }
         }
 
         $invoice->update([
@@ -217,15 +241,20 @@ class DashboardControllers extends Controller
     }
     public function pesananAdmin(Request $request)
     {
+        $kode_pesan = "pa_" . Auth::user()->id . "_" . rand(10000, 99999);
         $jml_menu = Menu::all()->count();
         for ($i = 0; $i < $jml_menu; $i++) {
             $menu = Menu::where("id", $request->{'menu_' . $i})->first();
             if ($request->{'menu_' . $i}) {
                 AdminPesan::create([
+                    "kode_pesan" => $kode_pesan,
                     "menu_id" => $request->{'menu_' . $i},
                     "jumlah" => $request->{'jumlah_' . $i},
                     "total" => $menu->harga * $request->{'jumlah_' . $i}
                 ]);
+                Statistik::where("nama", "pendapatan")->first()->increment('value', $menu->harga * $request->{'jumlah_' . $i});
+                $menu->increment("count", $request->{'jumlah_' . $i});
+                $menu->decrement("stok", $request->{'jumlah_' . $i});
             }
         }
         return back()->with("pesan", "Berhasil melakukan pembelian");

@@ -27,7 +27,7 @@
               </div>
               <div class="col-md-6 text-md-end">
                 <div class="text-muted">Tanggal Pembayaran</div>
-                <strong>@if($invoice->metode_pembayaran == "langsung") Silakan membayar langsung di Cake Nining @else {{ $invoice->created_at->format("l, j F Y - h:m a") }} @endif</strong>
+                <strong>@if($invoice->metode_pembayaran == "langsung") Silakan membayar langsung di Cake Nining @else {{ $invoice->created_at->format("l, j F Y - g:i a") }} @endif</strong>
                 <div class="text-muted">Status</div>
                 @if ($invoice->status == "belum")
                   <span class="badge bg-warning">Belum Dikonfirmasi</span>

@@ -19,7 +19,7 @@ class MenuSeeder extends Seeder
             "nama" => "Bolu Gulung",
             "harga" => "3000",
             "kategori" => "Kue Basah",
-            "stok" => "0"
+            "stok" => "12"
         ]);
         Menu::create([
             "gambar" => "gabin_fla.jpg",
