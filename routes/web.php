@@ -49,6 +49,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/pesanan', [DashboardControllers::class, 'pesanan']);
     Route::get('/akun-pengguna', [DashboardControllers::class, 'akunPengguna']);
 
+    Route::post('/keuangan-tambah', [DashboardControllers::class, 'keuanganTambah']);
+    Route::post('/keuangan-ubah', [DashboardControllers::class, 'keuanganUbah']);
+    Route::get('/keuangan-hapus/{keuangan}', [DashboardControllers::class, 'keuanganHapus']);
+
+    Route::get('/pemesanan-hapus/{kode}', [DashboardControllers::class, 'pemesananHapus']);
+    Route::post('/pemesanan-ubah', [DashboardControllers::class, 'pemesananUbah']);
+
     Route::post("/kelola-profile", [DashboardControllers::class, "kelolaProfile"]);
     Route::post("/kelola-promo", [DashboardControllers::class, "kelolaPromo"]);
 

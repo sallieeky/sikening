@@ -64,7 +64,7 @@
                       </div>
                     </div>
                   </div>
-                  <h4 class="mt-1 mb-3">Rp. {{ number_format($pendapatan,2,",",".") }}</h4>
+                  <h4 class="mt-1 mb-3">Rp. {{ number_format($total,2,",",".") }}</h4>
                   <div class="mb-0">
                     <span class="text-muted"><small>Data di hitung secara otomatis</small></span>                  
                   </div>

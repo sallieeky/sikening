@@ -19,6 +19,8 @@ Adapun File data yang dapat diterima oleh SIKENING yaitu file .jpg, .png, .pdf, 
 Drive gambar : https://drive.google.com/drive/folders/1bdCgImIriGvf2arF3QVSS34kDlc081LZ?usp=sharing
 Contoh Template Dashboard : https://demo.adminkit.io/pages-invoice.html
 
+AIzaSyBUZC0h75vc7XWnralRk_NqIXmFkP5_2Uw
+
 
 ========== Menampilkan profil Cake Nining beserta menu, harga, dan stok produk yang ada =========
 Input 	:

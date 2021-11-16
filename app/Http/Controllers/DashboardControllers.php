@@ -6,6 +6,7 @@ use App\Models\AdminPesan;
 use App\Models\Aktifitas;
 use App\Models\Invoice;
 use App\Models\Keranjang;
+use App\Models\Keuangan;
 use App\Models\Menu;
 use App\Models\Profile;
 use App\Models\Statistik;
@@ -27,13 +28,36 @@ class DashboardControllers extends Controller
             $pesanan = Invoice::all()->count();
             $menu = Menu::all()->pluck("count");
 
+            $keuangan = Keuangan::all();
+            $invoice = Invoice::all();
+            $adminPesan = AdminPesan::all();
+
+            $pInvoice = 0;
+            $pAdmin = 0;
+
+            $adminKode = [];
+            foreach ($invoice->where("status", "Terima") as $iv) {
+                $pInvoice += $iv->total_pembayaran;
+            }
+            foreach ($adminPesan as $ap) {
+                $pAdmin += $ap->total;
+            }
+            foreach ($keuangan as $ku) {
+                $pAdmin += $ku->total;
+            }
+            $total = $pInvoice + $pAdmin;
+
+
             $penjualan = 0;
             foreach ($menu as $mn) {
                 $penjualan += $mn;
             }
+            foreach ($keuangan as $ku) {
+                $pendapatan += $ku->total;
+            }
 
             $menu_terlaris = Menu::orderBy("count", "DESC")->get()->take(5);
-            return view("dashboard.dashboard_admin", compact("pengunjung", "menu_terlaris", "pendapatan", "pesanan", "penjualan"));
+            return view("dashboard.dashboard_admin", compact("pengunjung", "menu_terlaris", "pendapatan", "pesanan", "penjualan", "total"));
         } else {
             $menu_terlaris = Menu::orderBy("count", "DESC")->get()->take(3);
             return view("dashboard.dashboard_user", compact("menu_terlaris"));
@@ -198,6 +222,7 @@ class DashboardControllers extends Controller
     {
         $invoice = Invoice::all();
         $adminPesan = AdminPesan::all();
+        $keuangan = Keuangan::all();
 
         $pInvoice = 0;
         $pAdmin = 0;
@@ -210,12 +235,70 @@ class DashboardControllers extends Controller
             $pAdmin += $ap->total;
             $adminKode[] = $ap->kode_pesan;
         }
+        foreach ($keuangan as $ku) {
+            $pAdmin += $ku->total;
+        }
         $adminKode = array_values(array_unique($adminKode));
 
         $total = $pInvoice + $pAdmin;
 
-        return view("dashboard.keuangan", compact("invoice", "adminPesan", "pInvoice", "pAdmin", "total", "adminKode"));
+        return view("dashboard.keuangan", compact("invoice", "adminPesan", "pInvoice", "pAdmin", "total", "adminKode", "keuangan"));
     }
+
+    public function keuanganTambah(Request $request)
+    {
+        Keuangan::create([
+            'bukti' => $request->file('bukti')->getClientOriginalName(),
+            'total' => $request->total
+        ]);
+        $request->file('bukti')->storeAs('public/keuangan', $request->file('bukti')->getClientOriginalName());
+        return back()->with("pesan", "Berhasil menambahkan data keuangan");
+    }
+    public function keuanganUbah(Request $request)
+    {
+        if ($request->bukti) {
+            $bukti = $request->file('bukti')->getClientOriginalName();
+            $request->file('bukti')->storeAs('public/keuangan', $request->file('bukti')->getClientOriginalName());
+        } else {
+            $bukti = $request->bukti_backup;
+        }
+        Keuangan::where("id", $request->id)
+            ->update([
+                'bukti' => $bukti,
+                'total' => $request->total
+            ]);
+        return back()->with("pesan", "Berhasil mengubah data keuangan");
+    }
+    public function keuanganHapus(Keuangan $keuangan)
+    {
+        $keuangan->delete();
+        return back()->with("pesan", "Berhasil menghapus data keuangan");
+    }
+
+    public function pemesananHapus($kode)
+    {
+        $data = AdminPesan::where("kode_pesan", $kode)->get();
+        foreach ($data as $d) {
+            $menu = Menu::where("id", $d->menu_id)->first();
+            $menu->decrement("count", $d->jumlah);
+            $menu->increment("stok", $d->jumlah);
+            Statistik::where("nama", "pendapatan")->first()->decrement('value', $d->total);
+            $d->delete();
+        }
+        return back()->with("pesan", "Berhasil menghapus data pemesanan");
+    }
+    public function pemesananUbah(Request $request)
+    {
+        $data = AdminPesan::where("kode_pesan", $request->kode_pesan)->get();
+        foreach ($data as $d) {
+            $d->update([
+                "jumlah" => $request->{$d->id},
+                "total" => $request->{$d->id} * $d->menu->harga
+            ]);
+        }
+        return back()->with("pesan", "Berhasil mengubah data pemesanan");
+    }
+
     public function pesanan()
     {
         $invoice = Invoice::where("status", "belum")->get();
